@@ -1,0 +1,47 @@
+.create-post-container {
+    border:1px black;
+    width:100vw;
+
+
+    .create-post {
+        margin-top: 5vh;
+        display: inline-block;
+        width:40vw;
+        background-color: #434747;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+        padding:20px;
+
+
+
+        .post {
+            display:flex;
+           
+
+            .profile-pic {
+                justify-content: flex-start;
+            }
+            
+            .post-input {
+                width:100%;
+                display: flex;
+               justify-content: center;
+               align-items: center;
+            }
+            
+        }
+
+        button {
+            background-color: cornflowerblue;
+            border-radius: 5px;
+            color:white;
+            border: none;
+            width:10vw;
+            height:3vh;
+            cursor: pointer;
+        }
+    }
+
+    
+}

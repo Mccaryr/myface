@@ -1,0 +1,21 @@
+.header-container {
+    top:0;
+    display:flex;
+    height:6vh;
+    background-color: #434747;
+    color: white;
+    align-items: center;
+    justify-content: center;
+
+    .header-navlinks {
+        display: flex;
+        gap:15vw;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    a {
+        text-decoration: none;
+        color:white;
+    }
+}

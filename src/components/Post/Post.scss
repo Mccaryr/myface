@@ -1,0 +1,19 @@
+.post-container {
+    margin-top: 5vh;
+    background-color: #434747;
+    display:flex;
+    width:40vw;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    padding:20px;
+
+
+    .post-feed-text  {
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        word-break: break-word;
+        color:white;
+    }
+}

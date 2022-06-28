@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { createPost } from '../../features/postSlice';
+import { createPost } from '../../features/posts/postSlice';
 import './CreatePost.scss'
 import TextareaAutosize from 'react-textarea-autosize';
 import { useAppDispatch } from '../../app/hooks';

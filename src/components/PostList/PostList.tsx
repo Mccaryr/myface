@@ -4,7 +4,7 @@ import './PostList.scss'
 
 
 const PostList = () => {
-    const posts = useAppSelector((state) => state.posts)
+    const posts = useAppSelector((state) => state.posts.postArray)
 
   return (
     <div className='post-list-container'>

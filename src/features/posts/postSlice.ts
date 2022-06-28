@@ -1,9 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Post } from '../models/PostModel';
+import { Post } from '../../models/PostModel';
 
-type PostState = Post[]
+interface PostSliceState {
+ postArray: Post[]; 
+}
 
-const initialState: PostState = []
+const initialState: PostSliceState = {
+  postArray: []
+}
 
 const postSlice = createSlice({
   name: 'posts',
@@ -12,7 +16,7 @@ const postSlice = createSlice({
 
   reducers: {
     createPost: (state, action: PayloadAction<Post>) => {
-        state.push(action.payload);
+        state.postArray.push(action.payload);
     }
   }
 });

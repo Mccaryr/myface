@@ -2,7 +2,7 @@ import React from 'react'
 import CreatePost from '../CreatePost/CreatePost'
 import PostList from '../PostList/PostList'
 
-const Feed = () => {
+const Feed: React.FC = () => {
   return (
     <div>
         <CreatePost />

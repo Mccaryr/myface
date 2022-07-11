@@ -4,7 +4,7 @@ import { createUser } from '../../Auth'
 import { logoutUser } from '../../features/user/userSlice'
 import './Header.scss'
 
-const Header = () => {
+const Header: React.FC = () => {
   const dispatch = useAppDispatch()
 
   return (

@@ -5,6 +5,6 @@ export const PostType = new GraphQLObjectType({
     fields: () => ({
         id: {type: GraphQLID},
         content: { type: GraphQLString},
-        user_id: {type: GraphQLID}
+        user_id: {type: GraphQLString}
     })
 })

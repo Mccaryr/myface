@@ -2,18 +2,42 @@
     margin-top: 5vh;
     background-color: #434747;
     display:flex;
+    position:relative;
     width:40vw;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    // flex-direction: row;
+    // align-items: center;
+    // justify-content: space-around;
     border-radius: 5px;
     padding:20px;
 
 
     .post-feed-text  {
+        justify-content: flex-start;
         word-wrap: break-word;
         white-space: pre-wrap;
         word-break: break-word;
         color:white;
+
+        .feed-textarea {
+            background-color: #434747;
+            border: none;
+            resize:none;
+            overflow:auto;
+            width: 40vw;
+            color:white;
+        }
+    }
+
+    button {
+        display:inline-block;
+        background-color: red;
+        color:white;
+        border-radius: 4px;
+        border: none;
+        position:absolute;
+        top:0;
+        right:0;
+        height:2vh;
+        width:2vw;
     }
 }

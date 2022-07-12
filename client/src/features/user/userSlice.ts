@@ -16,8 +16,9 @@ const userSlice = createSlice({
   reducers: {
 
     saveUser: (state, action: PayloadAction<string>) => {
-        state.uid = action.payload;
-        state.signedIn = true;
+        state.uid = JSON.parse(action.payload);
+        state.signedIn = true; 
+     
     },
 
     logoutUser: (state) => {

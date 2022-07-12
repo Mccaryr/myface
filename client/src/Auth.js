@@ -52,19 +52,16 @@ export const createUser = (email, password) => {
 }
 
 //Sign in existing User
-export const signIn = (email, password) => {
-  
-  const auth = getAuth();
-  signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
+export const signIn = async (email, password) => {
+  try{
+    const auth = getAuth();
+    const userCredential = await signInWithEmailAndPassword(auth, email, password)
     const user = userCredential.user;
     sessionStorage.setItem('uid', user.uid)
     console.log(user)
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log("ErrorCode: ", errorCode)
-    console.log("ErrorMessage: ", errorMessage)
-  })
+  } catch(err) {
+    throw err;
+    
+  }
+  
 }

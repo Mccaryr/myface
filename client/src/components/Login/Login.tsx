@@ -7,25 +7,34 @@ import './Login.scss'
 const Login = () => {
     const [emailInput, setEmailInput] = useState<string>('')
     const [passInput, setPassInput] = useState<string>('')
+    const [errorMessage, setErrorMessage] = useState<string>('')
     const dispatch = useAppDispatch();
 
 
     const signUp = (e: React.MouseEvent<HTMLButtonElement>) => {
 
       e.preventDefault();
-      createUser(emailInput, passInput);
-      setEmailInput('')
-      setPassInput('')
-      
+        createUser(emailInput, passInput);
+        setEmailInput('')
+        setPassInput('')    
     }
 
-    const signInUser = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const signInUser = async (e: React.MouseEvent<HTMLButtonElement>) => {
+
+      try {
         e.preventDefault();
-        signIn(emailInput, passInput);
-        setEmailInput('')
-        setPassInput('')
-        dispatch(saveUser(JSON.stringify(sessionStorage.getItem('uid'))))
+        await signIn(emailInput, passInput); 
+          dispatch(saveUser(JSON.stringify(sessionStorage.getItem('uid'))))
+          setErrorMessage('')
+          setEmailInput('')
+          setPassInput('')
+
+      } catch(err) {
+        setErrorMessage("Incorrect Username or Password")
       }
+         
+        
+    }
     
 
   return (
@@ -33,9 +42,10 @@ const Login = () => {
         <div className='login-form'>
             <h1>MyFace Social</h1>
             <form>
+                <div>{errorMessage}</div>
                 <input type="email" placeholder='Email' onChange={(e) => setEmailInput(e.target.value)} value={emailInput} />
                 <input type="password" placeholder='Password' onChange={(e) => setPassInput(e.target.value)} value={passInput}  />
-                <button onClick={(e) => signInUser(e)}>Log In</button>
+                <button disabled={emailInput.length < 1} onClick={(e) => signInUser(e)}>Log In</button>
                 <a href="/">Forgot Password</a>
                 <button onClick={(e) => signUp(e)}>Create new account</button>
             </form>

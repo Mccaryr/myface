@@ -8,7 +8,7 @@ export const CREATE_POST = {
     type: PostType,
     args: {
         content: { type: GraphQLString},
-        user_id: {type: GraphQLID}
+        user_id: {type: GraphQLString}
     }, 
     async resolve(parent: any, args: any ) {
         const { content, user_id } = args;
@@ -18,7 +18,7 @@ export const CREATE_POST = {
 }
 
 export const DELETE_POST = {
-    type: MessageType,
+    type: PostType,
     args: {
         id: {type: GraphQLID},
         content: { type: GraphQLString},

@@ -4,7 +4,7 @@ import { Posts } from "../../Entities/Post";
 
 interface IPost {
     content: string,
-    user_id: number
+    user_id: string
 }
 
 export const GET_ALL_POSTS = {

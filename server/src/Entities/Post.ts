@@ -10,5 +10,5 @@ export class Posts extends BaseEntity {
     content!: string;
 
     @Column()
-    user_id!: number;
+    user_id!: string;
 }

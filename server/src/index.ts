@@ -4,15 +4,19 @@ import cors from "cors"
 import { DataSource } from "typeorm"
 import {schema} from './Schema'
 import { Posts } from "./Entities/Post"
+import dotenv from 'dotenv'
+
 
 const main = async () => {
+    dotenv.config();
+    
     let MysqlDataSource = new DataSource({
         type: "mysql",
-        host: "database-1.cmblqtbqzkf4.us-east-1.rds.amazonaws.com",
+        host: process.env.DB_HOST,
         database: "sys",
-        username: "admin",
-        password: "=4mbLLaXCMdG!VM",
-        port:3306,
+        username: process.env.DB_USERNAME,
+        password: process.env.DB_PASSWORD,
+        port: 3306,
         synchronize: true,
         entities: [Posts]  
     })

@@ -28,3 +28,37 @@ export const DELETE_POST = gql`
             }
     }
 `
+
+export const UPDATE_POST = gql`
+
+    mutation updatePost(
+        $id: ID!
+        $content: String!
+        $newContent: String!
+        ) {
+            updatePost(
+            id: $id
+            content: $content
+            newContent: $newContent
+            ) {
+                id
+                content
+            }
+    }
+`
+
+export const CREATE_IMAGE = gql`
+
+    mutation createImage(
+        $image: String! 
+        $user_id: String!
+        ) {
+        createImage(
+            image: $image 
+            user_id: $user_id
+            ) {
+                image
+                user_id
+            }
+    }
+`

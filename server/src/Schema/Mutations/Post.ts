@@ -36,11 +36,10 @@ export const UPDATE_POST = {
     args: {
         id: { type: GraphQLID},
         content: { type: GraphQLString},
-        user_id: { type: GraphQLID},
         newContent: { type: GraphQLString}
     }, 
     async resolve(parent: any, args: any ) {
-        const {id, content, user_id, newContent} = args
+        const {id, content, newContent} = args
         const post = await Posts.update({id: id}, {content: newContent});
         
         if(!post) {

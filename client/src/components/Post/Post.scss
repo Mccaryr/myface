@@ -17,6 +17,7 @@
         white-space: pre-wrap;
         word-break: break-word;
         color:white;
+        padding:2rem;
 
         .feed-textarea {
             background-color: #434747;
@@ -37,7 +38,21 @@
         position:absolute;
         top:0;
         right:0;
-        height:2vh;
-        width:2vw;
+        height:3vh;
+        // width:3vw;
+        cursor: pointer;
+
+    }
+
+    .edit-button {
+        background-color: rgb(95, 194, 161);
+        color:white;
+        border:none;
+        border-radius: 5px;
+        height:3vh;
+        position:absolute;
+        top:0px;
+        right:8vw;
+        cursor: pointer;
     }
 }

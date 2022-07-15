@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import './App.scss';
-import Login from './components/Login/Login';
+import Login from './Pages/Login/Login';
 import { Routes, Route } from 'react-router-dom';
 import Home from './Home';
 import { useAppSelector } from './app/hooks';
 import { saveUser } from './features/user/userSlice';
 import { useAppDispatch } from './app/hooks';
+import Profile from './Pages/Profile/Profile';
 
 function App() {
   const signedIn = useAppSelector((state) => state.user.signedIn)
@@ -21,10 +22,13 @@ function App() {
 
   return (
       <div className="App">
-      {!signedIn ? <Login /> : <Home />}
-      {/* <Routes>
-        <Route index element={<Home />} />
-      </Routes> */}
+      <Routes>
+        {!signedIn ? <Route index element={<Login />} />
+        :
+        <Route index element={<Home />} />}
+        
+        <Route path='/profile' element={<Profile />} />
+      </Routes>
       
       </div>
   );

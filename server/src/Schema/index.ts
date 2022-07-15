@@ -1,6 +1,7 @@
 import { GraphQLObjectType, GraphQLSchema } from "graphql";
 import { GET_ALL_POSTS } from "./Queries/Post";
 import { CREATE_POST, DELETE_POST, UPDATE_POST } from "./Mutations/Post";
+import { CREATE_IMAGE } from "./Mutations/Image";
 
 const RootQuery = new GraphQLObjectType({
     name: "RootQuery",
@@ -14,7 +15,8 @@ const Mutation = new GraphQLObjectType({
     fields: {
         createPost: CREATE_POST,
         deletePost: DELETE_POST,
-        updatePost: UPDATE_POST
+        updatePost: UPDATE_POST,
+        createImage: CREATE_IMAGE
     }
 })
 

@@ -25,8 +25,6 @@ const Profile = () => {
 
       const imageUrl = url.split('?')[0]
       setUploadedImage(imageUrl)
-      console.log(imageUrl)
-      console.log(typeof(imageUrl))
       createImage({variables: {image: imageUrl, user_id: uid}})
     }
 

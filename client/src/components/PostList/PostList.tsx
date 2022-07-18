@@ -9,7 +9,7 @@ import { useEffect } from 'react'
 
 
 const PostList = () => {
-    const {data: postData, error} = useQuery(GET_ALL_POSTS)
+    const {data: postData, error, loading} = useQuery(GET_ALL_POSTS)
   
     
 

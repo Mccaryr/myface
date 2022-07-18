@@ -8,7 +8,7 @@ type Post {
 }
 
 type User {
-    id: ID
+    _id: ID
     user_id: String
     email: String
     profile_image: String 
@@ -16,11 +16,49 @@ type User {
     last_name: String 
     job: String 
     education: String 
-    
+    friends: [User]
 }
 
 type Query {
     posts: [Post!]!
     user(user_id: String): User
+    users: [User!]!
+}
+
+input CreatePostInput {
+    content: String
+    user_id: String 
+}
+
+input UpdatePostInput {
+    id: ID!
+    newContent: String!
+}
+
+input UserInput {
+    _id: ID
+    user_id: String
+    profile_image: String 
+    first_name: String 
+    last_name: String 
+    
+}
+
+input CreateUserInput {
+    _id: String
+    user_id: String
+    email: String
+    profile_image: String 
+    first_name: String 
+    last_name: String 
+    job: String 
+    friends: [UserInput]
+}
+
+type Mutation {
+    createPost(input: CreatePostInput!): Post
+    updatePost(input: UpdatePostInput!): Post
+    deletePost(id: ID!): Post
+    createUser(input: CreateUserInput): User
 }
 `

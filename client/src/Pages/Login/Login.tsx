@@ -3,20 +3,22 @@ import { createUser, signIn  } from '../../Auth'
 import { useAppDispatch } from '../../app/hooks'
 import { saveUser } from '../../features/user/userSlice'
 import './Login.scss'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
     const [emailInput, setEmailInput] = useState<string>('')
     const [passInput, setPassInput] = useState<string>('')
     const [errorMessage, setErrorMessage] = useState<string>('')
+    const navigate = useNavigate()
     const dispatch = useAppDispatch();
 
 
     const signUp = (e: React.MouseEvent<HTMLButtonElement>) => {
-
-      e.preventDefault();
-        createUser(emailInput, passInput);
-        setEmailInput('')
-        setPassInput('')    
+      navigate('/signup')
+      // e.preventDefault();
+      //   createUser(emailInput, passInput);
+      //   setEmailInput('')
+      //   setPassInput('')    
     }
 
     const signInUser = async (e: React.MouseEvent<HTMLButtonElement>) => {

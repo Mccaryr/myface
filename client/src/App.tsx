@@ -7,6 +7,7 @@ import { useAppSelector } from './app/hooks';
 import { saveUser } from './features/user/userSlice';
 import { useAppDispatch } from './app/hooks';
 import Profile from './Pages/Profile/Profile';
+import SignUp from './Pages/SignUp/SignUp';
 
 function App() {
   const signedIn = useAppSelector((state) => state.user.signedIn)
@@ -28,6 +29,7 @@ function App() {
         <Route index element={<Home />} />}
         
         <Route path='/profile' element={<Profile />} />
+        <Route path='/signup' element={<SignUp />} />
       </Routes>
       
       </div>

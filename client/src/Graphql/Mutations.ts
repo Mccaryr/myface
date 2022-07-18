@@ -62,3 +62,14 @@ export const CREATE_IMAGE = gql`
             }
     }
 `
+
+export const CREATE_USER = gql`
+    mutation createUser($input: CreateUserInput) {
+        createUser(input: $input) {
+            user_id
+            first_name
+            last_name
+            email
+        }
+    }
+`

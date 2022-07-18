@@ -1,33 +1,15 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import mongoose from 'mongoose'
 
-@Entity()
-export class Users extends BaseEntity {
+ const UserSchema = new mongoose.Schema({ 
+    user_id: {type: String, required: true},
+    friends: {type: Array, required: false},
+    profile_image: {type: String, required: false},
+    first_name: {type: String, required: true},
+    last_name: {type: String, required: true},
+    job: {type: String, required: false},
+    education: {type: String, required: false},
+}, {timestamps: true})
 
-    @PrimaryGeneratedColumn()
-    id!:number;
-
-    @Column()
-    user_id!:string;
-
-    @Column()
-    profile_image!:string;
-
-    @Column()
-    email!:string;
-
-    @Column()
-    first_name!:string;
-
-    @Column()
-    last_name!:string;
-
-    @Column()
-    job!:string;
-
-    @Column()
-    education!:string;
-
-    
+export const User = mongoose.model('User', UserSchema)
 
 
-}

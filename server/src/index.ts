@@ -1,19 +1,23 @@
 import express from "express"
-import { graphqlHTTP } from "express-graphql"
 import cors from "cors"
 import { DataSource } from "typeorm"
-// import {schema} from './Schema'
+import mongoose from 'mongoose'
 import { Posts } from "./Entities/Post"
 import dotenv from 'dotenv'
-import { Users } from "./Entities/User"
+import { User } from "./Entities/User"
 import {generateUploadURL} from './S3/s3'
 import { ApolloServer } from "apollo-server"
 import { typeDefs } from "./Schema/typeDefs"
 import { resolvers } from "./Schema/resolvers"
 
-
 const main = async () => {
-    dotenv.config();
+    
+    dotenv.config()
+
+    mongoose.connect(process.env.MONGO_URL as string)
+    const db = mongoose.connection
+    db.on('error', (error) => console.log(error))
+    db.once('open', () => console.log('Connected to Mongo Database'))
     
     let MysqlDataSource = new DataSource({
         type: "mysql",
@@ -23,12 +27,12 @@ const main = async () => {
         password: process.env.DB_PASSWORD,
         port: 3306,
         synchronize: true,
-        entities: [Posts, Users]
+        entities: [Posts]
     })
 
     MysqlDataSource.initialize()
     .then(()=> {
-        console.log("Data Source has been initialized")
+        console.log("Connected to MYSQL Database")
     })
     .catch((err) => {
         console.log(err)
@@ -36,8 +40,10 @@ const main = async () => {
 
     
 
+    
+
     const app = express();
-    // app.use(cors());
+    app.use(cors());
     // app.use(express.json())
 
     const server = new ApolloServer({ typeDefs, resolvers})
@@ -48,21 +54,12 @@ const main = async () => {
     })
 
 
-    // app.use("/graphql", graphqlHTTP({
-    //     schema, 
-    //     graphiql: true
-    // }))
-
-    /** Apollo Server setup
-    const server = new ApolloServer({ typeDefs, resolvers})
-
-    */
     
 
     app.listen(3001, ()=> console.log("Server is Running on 3001"))
 
     server.listen().then(({url}) => {
-        console.log(`Your Apollo Server is Running at: ${url}`)
+        console.log(`Apollo Server is Running at: ${url}`)
     })
 }
 

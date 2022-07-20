@@ -1,6 +1,6 @@
 import React from 'react'
-import CreatePost from '../CreatePost/CreatePost'
-import PostList from '../PostList/PostList'
+import CreatePost from '../../components/CreatePost/CreatePost'
+import PostList from '../../components/PostList/PostList'
 
 const Feed: React.FC = () => {
   return (

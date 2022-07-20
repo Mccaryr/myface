@@ -13,7 +13,7 @@ const Header: React.FC = () => {
         <div className="header-navlinks">
             <a href="/">Myface</a>
             <Link to='/profile' >Profile</Link>
-            <a href="/">Messages</a>
+            <Link to='/messages' >Messages</Link>
             <button onClick={() => dispatch(logoutUser())}>Logout</button>
         </div>
     </div>

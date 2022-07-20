@@ -35,19 +35,21 @@ onAuthStateChanged(auth, (user) => {
 
 
 //Create User 
-export const createUser = (email, password) => {
+export const createUser = async (email, password) => {
   const auth = getAuth();
-  createUserWithEmailAndPassword(auth, email, password)
+  await createUserWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     //Signed in
-    const user = userCredential.user;
-    console.log("created user")
+    const user_id = userCredential.user.uid;
+    sessionStorage.setItem('uid', user_id)
+    console.log("Inside createUser auth function: created user: ", user_id)
   })
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
     console.log("ErrorCode: ", errorCode)
     console.log("ErrorMessage: ", errorMessage)
+    throw error;
   })
 }
 

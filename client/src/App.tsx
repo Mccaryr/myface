@@ -8,6 +8,8 @@ import { saveUser } from './features/user/userSlice';
 import { useAppDispatch } from './app/hooks';
 import Profile from './Pages/Profile/Profile';
 import SignUp from './Pages/SignUp/SignUp';
+import Header from './components/Header/Header';
+import Messages from './Pages/Messages/Messages';
 
 function App() {
   const signedIn = useAppSelector((state) => state.user.signedIn)
@@ -16,13 +18,14 @@ function App() {
  
 
   useEffect (() => {
-    if(sessionStorage.getItem('uid')) {
+    if(sessionStorage.getItem('uid') && sessionStorage.getItem('uid') !== '') {
       dispatch(saveUser(JSON.stringify(sessionStorage.getItem('uid'))))
     }
   }, [])
 
   return (
       <div className="App">
+        {signedIn && <Header />}
       <Routes>
         {!signedIn ? <Route index element={<Login />} />
         :
@@ -30,6 +33,7 @@ function App() {
         
         <Route path='/profile' element={<Profile />} />
         <Route path='/signup' element={<SignUp />} />
+        <Route path='/messages' element={ <Messages /> } />
       </Routes>
       
       </div>

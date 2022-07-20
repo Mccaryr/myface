@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
+
 type userSliceState = {
     uid: string;
     signedIn: boolean;
@@ -17,8 +18,11 @@ const userSlice = createSlice({
 
     saveUser: (state, action: PayloadAction<string>) => {
         state.uid = JSON.parse(action.payload);
-        state.signedIn = true; 
-     
+        if(state.uid) {
+          state.signedIn = true;
+        }
+        
+         
     },
 
     logoutUser: (state) => {

@@ -1,4 +1,4 @@
-import Feed from './components/Feed/Feed';
+import Feed from './Pages/Feed/Feed';
 import Header from './components/Header/Header';
 
 const Home = () => {
@@ -6,7 +6,6 @@ const Home = () => {
 
   return (
     <div>
-        <Header />
         <Feed />
     </div>
   )

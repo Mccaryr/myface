@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import { createUser, signIn  } from '../../Auth'
+import { signIn  } from '../../Auth'
 import { useAppDispatch } from '../../app/hooks'
 import { saveUser } from '../../features/user/userSlice'
 import './Login.scss'
@@ -13,13 +13,7 @@ const Login = () => {
     const dispatch = useAppDispatch();
 
 
-    const signUp = (e: React.MouseEvent<HTMLButtonElement>) => {
-      navigate('/signup')
-      // e.preventDefault();
-      //   createUser(emailInput, passInput);
-      //   setEmailInput('')
-      //   setPassInput('')    
-    }
+    
 
     const signInUser = async (e: React.MouseEvent<HTMLButtonElement>) => {
 
@@ -49,7 +43,7 @@ const Login = () => {
                 <input type="password" placeholder='Password' onChange={(e) => setPassInput(e.target.value)} value={passInput}  />
                 <button disabled={emailInput.length < 1} onClick={(e) => signInUser(e)}>Log In</button>
                 <a href="/">Forgot Password</a>
-                <button onClick={(e) => signUp(e)}>Create new account</button>
+                <button onClick={() => navigate('/signup')}>Create new account</button>
             </form>
         </div>
     </div>

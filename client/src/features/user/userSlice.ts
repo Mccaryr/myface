@@ -28,7 +28,7 @@ const userSlice = createSlice({
     logoutUser: (state) => {
         state.signedIn = false;
         state.uid = ''
-        sessionStorage.setItem('uid', '')
+        sessionStorage.removeItem('uid')
     }
   }
 });

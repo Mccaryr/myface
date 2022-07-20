@@ -1,27 +1,30 @@
 import { useState } from 'react';
 import './CreatePost.scss'
 import TextareaAutosize from 'react-textarea-autosize';
-import { useAppDispatch } from '../../app/hooks';
 import { CREATE_POST } from '../../Graphql/Mutations';
-import { useMutation } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import { useAppSelector } from '../../app/hooks';
+import { GET_ALL_POSTS } from '../../Graphql/Queries';
 
 
 const CreatePost: React.FC = () => {
   const [postInput, setPostInput] = useState<string>('');
   const uid = useAppSelector((state) => state.user.uid)
-  const dispatch = useAppDispatch()
-  const [createPost, {error}] = useMutation(CREATE_POST)
+  const [createPost, {error}] = useMutation(CREATE_POST); 
+  const {data: postData, loading, refetch} = useQuery(GET_ALL_POSTS)
+
+  
 
 
-  const createPostHandler = () => {
+  const createPostHandler = async () => {
     try {
-      createPost({
-        variables: {content: postInput, user_id: uid}
-      })
-      setPostInput('');
+        const post = await createPost({variables: {content: postInput, user_id: uid}})
+        refetch();
+        setPostInput('');
+      
+      
 
-    } catch(err) {
+     } catch(err) {
       console.log(error)
     }
     

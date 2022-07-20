@@ -56,8 +56,8 @@ input CreateUserInput {
 }
 
 type Mutation {
-    createPost(input: CreatePostInput!): Post
-    updatePost(input: UpdatePostInput!): Post
+    createPost(content: String, user_id: String): Post
+    updatePost(id: ID, content:String, newContent:String): Post
     deletePost(id: ID!): Post
     createUser(input: CreateUserInput): User
 }

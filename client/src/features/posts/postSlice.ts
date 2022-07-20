@@ -15,12 +15,16 @@ const postSlice = createSlice({
 
 
   reducers: {
-    createPost: (state, action: PayloadAction<Post>) => {
+    getCurrentPostState: (state, action: any) => {
+      state.postArray = []
+      state.postArray = action.payload.posts
+    },
+    addPost: (state, action: PayloadAction<Post>) => {
         state.postArray.push(action.payload);
     }
   }
 });
 
-export const {createPost} = postSlice.actions
+export const {addPost, getCurrentPostState} = postSlice.actions
 
 export default postSlice.reducer

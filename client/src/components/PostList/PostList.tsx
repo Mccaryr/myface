@@ -4,14 +4,11 @@ import { GET_ALL_POSTS } from '../../Graphql/Queries'
 import { useQuery } from '@apollo/client'
 import './PostList.scss'
 import { Post as PostType } from '../../models/PostModel'
-import { useEffect } from 'react'
 
 
 
 const PostList = () => {
     const {data: postData, error, loading} = useQuery(GET_ALL_POSTS)
-  
-    
 
   return (
     <div className='post-list-container'>

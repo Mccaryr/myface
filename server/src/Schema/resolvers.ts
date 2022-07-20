@@ -22,15 +22,15 @@ export const resolvers = {
     },
 
     Mutation: {
-        createPost: async (parent: any, args: { input: any; }) => {
-            const post = args.input
+        createPost: async (parent: any, args: any) => {
+            const post = args
             await Posts.insert(post)
             return post
         },
         updatePost: async (parent: any, args: any) => {
-            const {id, newContent} = args.input
+            const {id, newContent} = args
             let postUpdated = await Posts.update({id: id}, {content: newContent})
-            return postUpdated;
+            return args
         },
         deletePost: async (parent: any, args: any) => {
             const id = args.id;

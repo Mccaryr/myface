@@ -42,7 +42,6 @@ export const createUser = async (email, password) => {
     //Signed in
     const user_id = userCredential.user.uid;
     sessionStorage.setItem('uid', user_id)
-    console.log("Inside createUser auth function: created user: ", user_id)
   })
   .catch((error) => {
     const errorCode = error.code;

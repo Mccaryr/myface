@@ -1,5 +1,4 @@
 import { Posts } from "../Entities/Post"
-// import { Users } from "../Entities/User";
 import { User } from "../Entities/User"
 
 export const resolvers = {
@@ -14,16 +13,16 @@ export const resolvers = {
             return users;
         },
 
-        user: async (parent: any, args: { user_id: string; }) => {
-            const user_id = args.user_id
+        user: async (parent: any, args: any) => {
+            const user_id = args.user_id 
             const user = await User.findOne({user_id: user_id})
             return user;
         }
     },
 
     Mutation: {
-        createPost: async (parent: any, args: any) => {
-            const post = args
+        createPost: async (parent: any, args: {input: any}) => {
+            const post = args.input
             await Posts.insert(post)
             return post
         },

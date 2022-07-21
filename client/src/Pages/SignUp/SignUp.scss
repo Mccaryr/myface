@@ -2,18 +2,13 @@
     display:flex;
     align-items: center;
     justify-content: center;
-    margin-top: 10vh;
+    margin-top: 2vh;
+    color: var(--primary-color);
 
-    h1 {
-        color: var(--primary-color);
-        padding-top:4rem;
-    }
     
     .signup-form {
         display:flex;
         flex-direction: column;
-        height:50vh;
-        width:40vw;
         border-radius: 10px;
         background-color: rgb(49, 49, 49);
         align-items: center;
@@ -23,8 +18,25 @@
         .signup-textfields {
          display: flex;
          flex-direction: column;
-         gap:4vh; 
-         width:18vw;  
+         gap:2vh;
+         
+         .name-container {
+            display: flex;
+            flex-direction: row;
+            gap:2vw;
+         }
+
+         .password-container {
+            display: flex;
+            flex-direction: row;
+            gap:2vw;
+         }
+
+         .profile-image-container {
+            display: flex;
+            flex-direction: row;
+            gap: 1vw;
+         }
 
          input {
             height:5vh;

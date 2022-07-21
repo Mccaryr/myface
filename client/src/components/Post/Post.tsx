@@ -51,7 +51,15 @@ const Post: React.FC<Props> = ({id, user_id, content}) => {
           <TextareaAutosize minRows={7} className="feed-textarea" value={newContent} onChange={(e) => submitContentHandler(e)} />
           <button onClick={()=> {
              setCanEdit(false);
-             updatePost({variables: {id: id, content: currentContent, newContent: newContent}});
+             updatePost({variables: {id: id, content: currentContent, newContent: newContent}, 
+            optimisticResponse: {
+              updatePost: {
+                id: id,
+                content: currentContent,
+                newContent: newContent,
+                __typename: "Post"
+              }
+            }});
              refetch()}}>Submit changes</button>
           <button onClick={()=> setCanEdit(false)}>Discard changes</button>
           </div>

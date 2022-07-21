@@ -2,7 +2,7 @@ import React from 'react'
 import { useAppDispatch } from '../../app/hooks'
 import { createUser } from '../../Auth'
 import { logoutUser } from '../../features/user/userSlice'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './Header.scss'
 
 const Header: React.FC = () => {
@@ -14,7 +14,9 @@ const Header: React.FC = () => {
             <a href="/">Myface</a>
             <Link to='/profile' >Profile</Link>
             <Link to='/messages' >Messages</Link>
-            <button onClick={() => dispatch(logoutUser())}>Logout</button>
+            <Link to='/' onClick={() => 
+              dispatch(logoutUser()) 
+              }>Logout</Link>
         </div>
     </div>
   )

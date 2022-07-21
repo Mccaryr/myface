@@ -2,12 +2,10 @@ import { useMutation } from '@apollo/client';
 import React from 'react'
 import { useState } from 'react'
 import { useAppSelector } from '../../app/hooks';
-import { CREATE_IMAGE } from '../../Graphql/Mutations';
 
 
 const Profile = () => {
     const [uploadedImage, setUploadedImage] = useState<string | undefined>()
-    const [createImage] = useMutation(CREATE_IMAGE)
     const uid = useAppSelector((state) => state.user.uid)
 
     const fileSelectedHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +23,6 @@ const Profile = () => {
 
       const imageUrl = url.split('?')[0]
       setUploadedImage(imageUrl)
-      createImage({variables: {image: imageUrl, user_id: uid}})
     }
 
     

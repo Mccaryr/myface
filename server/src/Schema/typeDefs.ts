@@ -5,6 +5,10 @@ type Post {
     id:ID!
     content: String!
     user_id: String!
+    profile_url: String
+    likes: Int 
+    dislikes: Int
+    fullname: String!  
 }
 
 type User {
@@ -22,12 +26,16 @@ type User {
 type Query {
     posts: [Post!]!
     user(user_id: String): User
-    users: [User!]!
+    users: [User]
 }
 
 input CreatePostInput {
     content: String
-    user_id: String 
+    user_id: String
+    profile_url: String
+    likes: Int = 0
+    dislikes: Int = 0 
+    fullname: String  
 }
 
 input UpdatePostInput {
@@ -52,11 +60,12 @@ input CreateUserInput {
     first_name: String 
     last_name: String 
     job: String 
+    education: String
     friends: [UserInput]
 }
 
 type Mutation {
-    createPost(content: String, user_id: String): Post
+    createPost(input: CreatePostInput): Post
     updatePost(id: ID, content:String, newContent:String): Post
     deletePost(id: ID!): Post
     createUser(input: CreateUserInput): User

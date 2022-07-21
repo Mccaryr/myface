@@ -10,6 +10,7 @@ import { GET_ALL_POSTS } from '../../Graphql/Queries';
 const CreatePost: React.FC = () => {
   const [postInput, setPostInput] = useState<string>('');
   const uid = useAppSelector((state) => state.user.uid)
+  const userDetails = useAppSelector((state) => state.user.userDetails)
   const [createPost, {error}] = useMutation(CREATE_POST); 
   const {data: postData, loading, refetch} = useQuery(GET_ALL_POSTS)
 
@@ -18,7 +19,10 @@ const CreatePost: React.FC = () => {
 
   const createPostHandler = async () => {
     try {
-        const post = await createPost({variables: {content: postInput, user_id: uid}})
+        const post = await createPost({variables: {
+          input: {content: postInput, user_id: uid, profile_url: sessionStorage.getItem('profile_url')}
+        }
+      })
         refetch();
         setPostInput('');
       
@@ -36,7 +40,7 @@ const CreatePost: React.FC = () => {
         <div className="create-post">
         <div className="post">
         <div className="profile-pic">
-                <p>pic</p>
+                <img src={sessionStorage.getItem('profile_url') as string} style={{height:'100px', width:'100px', borderRadius:'100px'}} />
             </div>
             <div className="post-input">
             <form>

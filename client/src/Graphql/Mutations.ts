@@ -2,16 +2,13 @@ import { gql } from "@apollo/client";
 
 export const CREATE_POST = gql`
 
-    mutation createPost(
-        $content: String! 
-        $user_id: String!
-        ) {
-        createPost(
-            content: $content 
-            user_id: $user_id
+    mutation createPost($input: createPostInput) {
+        createPost(input: $input 
             ) {
                 content
                 user_id
+                profile_url
+                fullname
             }
     }
 `
@@ -47,21 +44,7 @@ export const UPDATE_POST = gql`
     }
 `
 
-export const CREATE_IMAGE = gql`
 
-    mutation createImage(
-        $image: String! 
-        $user_id: String!
-        ) {
-        createImage(
-            image: $image 
-            user_id: $user_id
-            ) {
-                image
-                user_id
-            }
-    }
-`
 
 export const CREATE_USER = gql`
     mutation createUser($input: CreateUserInput) {
@@ -69,7 +52,11 @@ export const CREATE_USER = gql`
             user_id
             first_name
             last_name
+            education
+            job 
+            profile_image
             email
+            fullname
         }
     }
 `

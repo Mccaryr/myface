@@ -1,14 +1,22 @@
 import {useState} from 'react'
 import { signIn  } from '../../Auth'
 import { useAppDispatch } from '../../app/hooks'
-import { saveUser } from '../../features/user/userSlice'
+import { saveUser, saveUserDetails } from '../../features/user/userSlice'
 import './Login.scss'
 import { useNavigate } from 'react-router-dom'
+import { useLazyQuery } from '@apollo/client'
+import { GET_USER } from '../../Graphql/Queries'
 
 const Login = () => {
     const [emailInput, setEmailInput] = useState<string>('')
     const [passInput, setPassInput] = useState<string>('')
     const [errorMessage, setErrorMessage] = useState<string>('')
+    const [getUser, {data: userData, error}] = useLazyQuery(GET_USER, {
+      fetchPolicy: "cache-and-network",
+      onCompleted(data) {
+        dispatch(saveUserDetails(data))
+      },
+    })
     const navigate = useNavigate()
     const dispatch = useAppDispatch();
 
@@ -19,17 +27,25 @@ const Login = () => {
 
       try {
         e.preventDefault();
-        await signIn(emailInput, passInput); 
+        await signIn(emailInput, passInput)
+        await getUser({variables: {user_id: sessionStorage.getItem('uid')}}).then((res) => {
+          sessionStorage.setItem('userDetails', userData)
+        })
           dispatch(saveUser(JSON.stringify(sessionStorage.getItem('uid'))))
+          // Promise.all([promise1, promise2])
           setErrorMessage('')
           setEmailInput('')
           setPassInput('')
 
       } catch(err) {
         setErrorMessage("Incorrect Username or Password")
+      } finally {
+       
+        
       }
          
-        
+      
+
     }
     
 

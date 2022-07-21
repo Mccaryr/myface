@@ -7,6 +7,20 @@ export const GET_ALL_POSTS = gql`
             id
             content
             user_id
+            profile_url
+        }
+    }
+`
+
+export const GET_USER = gql`
+
+    query User($user_id: String!) {
+        user(user_id: $user_id) {
+             profile_image
+             first_name 
+             last_name
+             job 
+             education  
         }
     }
 `

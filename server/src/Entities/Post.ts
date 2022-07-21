@@ -11,4 +11,16 @@ export class Posts extends BaseEntity {
 
     @Column()
     user_id!: string;
+
+    @Column()
+    profile_url?: string;
+
+    @Column()
+    likes?: number
+
+    @Column()
+    dislikes?: number
+
+    @Column()
+    fullname!: string
 }

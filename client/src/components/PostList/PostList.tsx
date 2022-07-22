@@ -15,7 +15,7 @@ const PostList = () => {
     <div className='post-list-container'>
         {postData && postData.posts.map((post: PostType) => {
           return (
-            <Post key={post.id} id={post.id} content={post.content} user_id={post.user_id} />
+            <Post key={post.id} id={post.id} content={post.content} user_id={post.user_id} profile_url={post.profile_url} fullname={post.fullname} />
           )
         })}
     </div>

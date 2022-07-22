@@ -23,6 +23,7 @@ export const resolvers = {
     Mutation: {
         createPost: async (parent: any, args: {input: any}) => {
             const post = args.input
+            console.log("Inside createPost Mutaiton: ", post)
             await Posts.insert(post)
             return post
         },
@@ -37,7 +38,7 @@ export const resolvers = {
             return null;
         },
         createUser: async(parent: any, args: {input: any}) => {
-            const {user_id, email, profile_image, first_name, last_name, job, friends} = args.input
+            const {user_id, email, profile_url, first_name, last_name, job, friends} = args.input
             const user = args.input
             let createdUser = User.create(user)
             return createdUser;

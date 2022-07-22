@@ -15,7 +15,7 @@ type User {
     _id: ID
     user_id: String
     email: String
-    profile_image: String 
+    profile_url: String 
     first_name: String 
     last_name: String 
     job: String 
@@ -33,8 +33,6 @@ input CreatePostInput {
     content: String
     user_id: String
     profile_url: String
-    likes: Int = 0
-    dislikes: Int = 0 
     fullname: String  
 }
 
@@ -46,7 +44,7 @@ input UpdatePostInput {
 input UserInput {
     _id: ID
     user_id: String
-    profile_image: String 
+    profile_url: String 
     first_name: String 
     last_name: String 
     
@@ -56,7 +54,7 @@ input CreateUserInput {
     _id: String
     user_id: String
     email: String
-    profile_image: String 
+    profile_url: String 
     first_name: String 
     last_name: String 
     job: String 

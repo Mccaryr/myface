@@ -11,7 +11,7 @@ const Header: React.FC = () => {
   return (
     <div className='header-container'>
         <div className="header-navlinks">
-            <a href="/">Myface</a>
+            <Link to='/'>Myface</Link>
             <Link to='/profile' >Profile</Link>
             <Link to='/messages' >Messages</Link>
             <Link to='/' onClick={() => 

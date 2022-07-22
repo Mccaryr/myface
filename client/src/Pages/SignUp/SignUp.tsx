@@ -40,7 +40,7 @@ const SignUp = () => {
                             email: email,
                             job: job, 
                             education: education,
-                            profile_image: sessionStorage.getItem('profile_url') 
+                            profile_url: sessionStorage.getItem('profile_url') 
                         }   
                        
                     }}).then(() => {

@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const CREATE_POST = gql`
 
-    mutation createPost($input: createPostInput) {
+    mutation createPost($input: CreatePostInput) {
         createPost(input: $input 
             ) {
                 content
@@ -54,7 +54,7 @@ export const CREATE_USER = gql`
             last_name
             education
             job 
-            profile_image
+            profile_url
             email
             fullname
         }

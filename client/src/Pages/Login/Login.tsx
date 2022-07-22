@@ -28,11 +28,8 @@ const Login = () => {
       try {
         e.preventDefault();
         await signIn(emailInput, passInput)
-        await getUser({variables: {user_id: sessionStorage.getItem('uid')}}).then((res) => {
-          sessionStorage.setItem('userDetails', userData)
-        })
+        await getUser({variables: {user_id: sessionStorage.getItem('uid')}})
           dispatch(saveUser(JSON.stringify(sessionStorage.getItem('uid'))))
-          // Promise.all([promise1, promise2])
           setErrorMessage('')
           setEmailInput('')
           setPassInput('')

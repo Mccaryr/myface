@@ -2,19 +2,27 @@
     margin-top: 5vh;
     background-color: #434747;
     display:flex;
+    flex-direction: row;
     position:relative;
     width:40vw;
     border-radius: 5px;
     padding:20px;
+    color:white;
 
 
-    .post-feed-text  {
-        justify-content: flex-start;
-        word-wrap: break-word;
-        white-space: pre-wrap;
-        word-break: break-word;
-        color:white;
+    .post-elements  {
+        display:flex;
+        
         padding:2rem;
+
+
+        .post-text {
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            word-break: break-word;
+            color:white;
+            font-size: 22px;
+        }
 
         .feed-textarea {
             background-color: #434747;
@@ -26,7 +34,7 @@
         }
     }
 
-    .submit-button {
+    .delete-button {
         display:inline-block;
         background-color: red;
         color:white;
@@ -36,7 +44,6 @@
         top:0;
         right:0;
         height:3vh;
-        // width:3vw;
         cursor: pointer;
 
     }

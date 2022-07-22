@@ -4,13 +4,26 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 type userSliceState = {
     uid: string;
     signedIn: boolean;
-    userDetails: object;
+    userDetails: User;
+}
+
+interface User {
+  user_id: string;
+  profile_url: string;
+  first_name: string;
+  last_name: string;
+
 }
 
 const initialState: userSliceState = {
     uid: '',
     signedIn: false,
-    userDetails: {}
+    userDetails: {
+      first_name: "",
+      last_name: "",
+      user_id: "",
+      profile_url: ""
+    }
 }
 
 const userSlice = createSlice({
@@ -28,9 +41,11 @@ const userSlice = createSlice({
     },
 
     saveUserDetails: (state, action: PayloadAction<any>) => {
-      let profile_url = action.payload.user.profile_image
+      let profile_url = action.payload.user.profile_url
       sessionStorage.setItem('profile_url', profile_url)
-      state.userDetails = action.payload.user
+      sessionStorage.setItem('userInfo', JSON.stringify(action.payload.user))
+      state.userDetails = {...action.payload.user}
+      
       
        
   },

@@ -35,8 +35,11 @@ const Post: React.FC<Props> = ({id, user_id, content, profile_url, fullname}) =>
         {uid === user_id && canEdit===false && 
         <div className="post-elements">
           <div className="profile-image">
-          <img src={profile_url} alt="profile" style={{height:'80px', width:'80px', borderRadius:'100px'}}/>
-          <span>{fullname}</span>
+            <img src={profile_url} alt="profile" style={{height:'70px', width:'70px', borderRadius:'100px'}}/>
+              <div className="profile-name-timestamp">
+                <p>{fullname}</p>
+                <p style={{fontSize:"12px"}}>July 24 at 9:41pm</p>
+              </div>  
           </div>
           <div className='post-text'>{content}</div>
           <button className='edit-button' onClick={() => {

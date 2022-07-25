@@ -19,7 +19,8 @@ type User {
     first_name: String 
     last_name: String 
     job: String 
-    education: String 
+    education: String
+    location: String 
     friends: [User]
 }
 
@@ -59,6 +60,7 @@ input CreateUserInput {
     last_name: String 
     job: String 
     education: String
+    location: String 
     friends: [UserInput]
 }
 

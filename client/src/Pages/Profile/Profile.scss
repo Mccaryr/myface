@@ -1,0 +1,146 @@
+.profile-page {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    color:white;
+    flex-direction: column;
+
+    .cover-photo-and-profile-container {
+        align-items: center;
+        justify-content: center;
+        width:100vw;
+        height:74vh;
+        background-image: linear-gradient(black, rgb(49, 49, 49));
+        flex-direction: column;
+        overflow: hidden;
+        margin-top: -5vh;
+
+
+        .cover-photo {
+            width:60vw;
+            height:55vh;
+            border-radius: 10px;
+        }
+
+        .edit-cover-button {
+            background-color: rgb(95, 194, 161);
+            border-radius: 5px;
+            color:white;
+            border: none;
+            width:120px;
+            height:40px;
+            font-size: 12px;
+            cursor: pointer;
+            position:relative;
+            display:inline-block;
+            z-index: 2;
+            right:15em;
+            bottom:5em;
+            
+
+        }
+
+        .profile-image-and-name-container {
+            display:grid;
+            grid-template-columns: 1fr 0.1fr 1fr;
+            width:100vw;
+            
+
+            .profile-image img{
+                height:200px;
+                width:200px;
+                border-radius: 100px;
+                position:relative;
+                margin-top: -5vh;
+                background-size:cover;
+            }
+
+            .profile-name {
+                color:white;
+                font-size: 30px;
+                width:200px;
+                position:relative;
+                right:10em;
+                margin:1px;
+            }
+
+            .edit-profile-pic{
+                border-radius: 100px;
+                width:40px;
+                height:40px;
+                margin:0;
+                padding:0;
+                position:relative;
+                left:-4em;
+                bottom:1em;
+                z-index: 2;
+                background-color: rgb(49, 49, 49);
+            }
+
+            .edit-profile-pic:hover {
+                background-color: rgb(85, 85, 85);
+            }
+            
+        }
+    }
+
+    .posts-aboutme-container {
+        display:grid;
+        margin-top: 3vh;
+        grid-template-columns: 1fr 2fr;
+        width:80vw;
+        gap:10vw;
+        box-sizing: border-box;
+
+        .about-me {
+            display:flex;
+            flex-direction: column;
+            border-radius: 10px;
+            background-color:  rgb(49, 49, 49);
+            margin-bottom: 55px;
+            
+
+            .intro {
+                display:flex;
+                flex-direction: column;
+                padding-left: 25px;
+                align-items: flex-start;
+                
+            }
+
+            .edit-details-btn {
+                background-color: rgb(95, 194, 161);
+                border-radius: 5px;
+                color:white;
+                border: none;
+                width:100%;
+                padding:0;
+                height:40px;
+                font-size: 14px;
+                cursor: pointer;
+            }
+        }
+
+        .posts-col {
+            display: flex;
+            flex-direction: column;
+            gap:5vh;
+
+            .create-posts {
+                display:flex;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+                border-radius: 10px;
+                background-color: rgb(49, 49, 49);
+            }
+
+            .user-post-feed {
+                display:flex;
+                flex-direction: row;
+                background-color: rgb(49, 49, 49);
+                border-radius: 10px;
+            }
+        }
+    }
+}

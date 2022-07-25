@@ -57,6 +57,7 @@ export const CREATE_USER = gql`
             profile_url
             email
             fullname
+            location 
         }
     }
 `

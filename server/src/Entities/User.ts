@@ -8,6 +8,7 @@ import mongoose from 'mongoose'
     last_name: {type: String, required: true},
     job: {type: String, required: false},
     education: {type: String, required: false},
+    location: {type: String, required: false}
 }, {timestamps: true})
 
 export const User = mongoose.model('User', UserSchema)

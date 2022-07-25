@@ -17,6 +17,7 @@ const SignUp = () => {
     const [email, setEmail] = useState<string>('')
     const [job, setJob] = useState<string>('')
     const [education, setEducation] = useState<string>('')
+    const [location, setLocation] = useState<string>('')
     const [uploadedImage, setUploadedImage] = useState<any | null>()
     const [uploadedImageFile, setUploadedImageFile] = useState<any | null>()
     const [password, setPassword] = useState<string>('')
@@ -40,6 +41,7 @@ const SignUp = () => {
                             email: email,
                             job: job, 
                             education: education,
+                            location: location,
                             profile_url: sessionStorage.getItem('profile_url') 
                         }   
                        
@@ -51,6 +53,7 @@ const SignUp = () => {
                         setPassword('');
                         setEducation('')
                         setJob('')
+                        setLocation('')
                         navigate('/')
                   
                     })
@@ -116,8 +119,9 @@ const SignUp = () => {
                     <label>Choose Profile Image</label><input type="file" onChange={(e) => fileSelectedHandler(e)} />
                     {uploadedImage && <img style={{height:'200px', width:'200px', borderRadius:'100px'}} src={uploadedImage} />}              
                 </div>
-                <input type="text" placeholder="Job" required onChange={(e) => setJob(e.target.value)} />
-                <input type="text" placeholder="Education" required onChange={(e) => setEducation(e.target.value)} />
+                <input type="text" placeholder="Job" onChange={(e) => setJob(e.target.value)} />
+                <input type="text" placeholder="Education" onChange={(e) => setEducation(e.target.value)} />
+                <input type="text" placeholder="Residence" onChange={(e) => setLocation(e.target.value)} />
                 <div className="password-container">
                     <input type="password" placeholder="Myface Password" required onChange={(e) => setPassword(e.target.value)} />
                     <input type="password" placeholder="Confirm Password" required onChange={(e) => setConfirmedPassword(e.target.value)} />

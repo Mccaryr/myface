@@ -13,6 +13,18 @@ export const GET_ALL_POSTS = gql`
     }
 `
 
+export const GET_ALL_USER_POSTS = gql`
+    query getAllUserPosts {
+       user_posts { 
+            id
+            content
+            user_id
+            profile_url
+            fullname
+        }
+    }
+`
+
 export const GET_USER = gql`
 
     query User($user_id: String!) {
@@ -22,6 +34,7 @@ export const GET_USER = gql`
              last_name
              job 
              education  
+             location
         }
     }
 `

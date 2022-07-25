@@ -23,7 +23,6 @@ export const resolvers = {
     Mutation: {
         createPost: async (parent: any, args: {input: any}) => {
             const post = args.input
-            console.log("Inside createPost Mutaiton: ", post)
             await Posts.insert(post)
             return post
         },

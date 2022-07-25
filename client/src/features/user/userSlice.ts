@@ -55,6 +55,7 @@ const userSlice = createSlice({
         state.uid = ''
         sessionStorage.removeItem('uid')
         sessionStorage.removeItem('profile_url')
+        sessionStorage.removeItem('userInfo')
     }
   }
 });

@@ -17,6 +17,12 @@ export const resolvers = {
             const user_id = args.user_id 
             const user = await User.findOne({user_id: user_id})
             return user;
+        },
+
+        user_posts: async (parent: any, args: any) => {
+            const user_id = args.user_id;
+            const user_posts = await Posts.findBy({user_id: user_id})
+            return user_posts;
         }
     },
 

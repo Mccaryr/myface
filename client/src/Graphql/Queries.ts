@@ -14,8 +14,9 @@ export const GET_ALL_POSTS = gql`
 `
 
 export const GET_ALL_USER_POSTS = gql`
-    query getAllUserPosts {
-       user_posts { 
+
+    query getAllUserPosts($user_id: String) {
+       user_posts(user_id: $user_id) { 
             id
             content
             user_id

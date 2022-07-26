@@ -33,16 +33,44 @@ const Post: React.FC<Props> = ({id, user_id, content, profile_url, fullname}) =>
   return (
     <div className='post-container'>
         {uid === user_id && canEdit===false && 
-        <div className="post-elements">
-          <div className="profile-image">
+        // <div className="post-elements">
+        //   <div className="profile-image">
+        //     <img src={profile_url} alt="profile" style={{height:'70px', width:'70px', borderRadius:'100px'}}/>
+        //       <div className="profile-name-timestamp">
+        //         <p>{fullname}</p>
+        //         <p style={{fontSize:"12px"}}>July 24 at 9:41pm</p>
+        //       </div>  
+        //   </div>
+        //   <div className='post-text'>{content}</div>
+        //   <div className="comment-footer">
+        //     <div>likes 17</div> 
+        //     <div>dislikes 2</div>
+        //     <div>Reply 2</div>
+        //     <TextareaAutosize className='post-reply-comment' style={{textAlign:'center'}} placeholder='Write a comment' minRows={2}/>
+        //   </div>
+        //   <button className='edit-button' onClick={() => {
+        //     setCanEdit(true); 
+        //     setCurrentContent(content); 
+        //     setNewContent(content)} }>Edit Post</button>
+        //   <button className='delete-button' onClick={()=> {
+        //     deletePost({variables: {id: id}, refetchQueries:[
+        //       {query: GET_ALL_POSTS},
+        //       'getAllPosts'
+        //     ]}); 
+        //     }
+        //   }>Delete Post</button>
+        // </div>
+        <>
+        <div className="post-header">
+          <div className="post-header-first-col">
             <img src={profile_url} alt="profile" style={{height:'70px', width:'70px', borderRadius:'100px'}}/>
-              <div className="profile-name-timestamp">
-                <p>{fullname}</p>
-                <p style={{fontSize:"12px"}}>July 24 at 9:41pm</p>
-              </div>  
+            <div className="comment-user-ts">
+              <div>{fullname}</div>
+              <div style={{fontSize:"12px"}}>July 24 at 9:41pm</div>
+            </div>
           </div>
-          <div className='post-text'>{content}</div>
-          <button className='edit-button' onClick={() => {
+          <div className="post-header-second-col">
+            <button className='edit-button' onClick={() => {
             setCanEdit(true); 
             setCurrentContent(content); 
             setNewContent(content)} }>Edit Post</button>
@@ -53,13 +81,29 @@ const Post: React.FC<Props> = ({id, user_id, content, profile_url, fullname}) =>
             ]}); 
             }
           }>Delete Post</button>
-        </div>
+          </div>
+        </div> 
+          <div className='post-content'>{content}</div>
+          <div className="post-footer">
+            <hr style={{color:'white', width:'100%'}}/>
+            <div className="like-dislike-reply-bar">
+              <div>likes 17</div> 
+              <div>dislikes 2</div>
+              <div>Reply 2</div>
+            </div>
+            <hr style={{color:'white', width:'100%'}}/>
+            <div className="reply-section">
+              <img src={profile_url} alt="profile" style={{height:'50px', width:'50px', borderRadius:'100px'}}/>
+              <TextareaAutosize className='post-reply-comment' style={{textAlign:'center', width:'32vw'}} placeholder='Write a comment' minRows={2}/>
+            </div>
+          </div>
+          </>
         
     }   
     {uid === user_id && canEdit && 
           <div className='post-feed-text'>
           <TextareaAutosize minRows={7} className="feed-textarea" value={newContent} onChange={(e) => submitContentHandler(e)} />
-          <button onClick={()=> {
+          <button className='edit-button' onClick={()=> {
              setCanEdit(false);
              updatePost({variables: {id: id, content: currentContent, newContent: newContent}, 
             optimisticResponse: {
@@ -71,7 +115,7 @@ const Post: React.FC<Props> = ({id, user_id, content, profile_url, fullname}) =>
               }
             }});
              refetch()}}>Submit changes</button>
-          <button onClick={()=> setCanEdit(false)}>Discard changes</button>
+          <button className='delete-button' onClick={()=> setCanEdit(false)}>Discard changes</button>
           </div>
           }
     {uid !== user_id && 

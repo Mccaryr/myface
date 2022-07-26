@@ -59,7 +59,6 @@ export const signIn = async (email, password) => {
     const userCredential = await signInWithEmailAndPassword(auth, email, password)
     const user = userCredential.user;
     sessionStorage.setItem('uid', user.uid)
-    console.log(user)
   } catch(err) {
     throw err;
     

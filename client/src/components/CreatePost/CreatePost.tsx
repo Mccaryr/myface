@@ -5,20 +5,21 @@ import { CREATE_POST } from '../../Graphql/Mutations';
 import { useMutation } from '@apollo/client'
 import { useAppSelector } from '../../app/hooks';
 import { GET_ALL_POSTS } from '../../Graphql/Queries';
+import { User } from '../../models/UserModel';
 
 
 const CreatePost: React.FC = () => {
   const [postInput, setPostInput] = useState<string>('');
   const uid = useAppSelector((state) => state.user.uid)
-  const userDetails = useAppSelector((state) => state.user.userDetails)
+  const [user, setUser] = useState<User>()
   const [createPost, {error}] = useMutation(CREATE_POST); 
 
-
+  
 
   const createPostHandler = async () => {
     try {
         const post = await createPost({variables: {
-          input: {content: postInput, user_id: uid, profile_url: sessionStorage.getItem('profile_url'), fullname: userDetails.first_name + " " + userDetails.last_name}
+          input: {content: postInput, user_id: uid, profile_url: sessionStorage.getItem('profile_url'), fullname: user?.first_name + " " + user?.last_name}
         }, refetchQueries:[
           {query:GET_ALL_POSTS},
           'getAllPosts'
@@ -30,6 +31,10 @@ const CreatePost: React.FC = () => {
     }
     
   }
+
+  useEffect(() => {
+    setUser(JSON.parse(sessionStorage.getItem('userInfo')!))
+  }, [])
 
 
   return (

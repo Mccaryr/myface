@@ -1,61 +1,127 @@
 .post-container {
+    display:grid;
+    grid-template-rows: 1fr 0.5fr 1fr;
     margin-top: 5vh;
-    background-color: #434747;
+    background-color: rgb(49, 49, 49);
     position:relative;
     width:40vw;
     border-radius: 5px;
     padding:20px;
     color:white;
 
+    // .post-elements  {
+    //     padding:2rem;
 
-    .post-elements  {
-        padding:2rem;
-
-        .profile-image {
-            display:flex;
-            flex-direction: row;
-            position:absolute;
-            top:5px;
-            left:5px;
+    //     .profile-image {
+    //         display:flex;
+    //         flex-direction: row;
+    //         position:absolute;
+    //         top:5px;
+    //         left:5px;
 
 
-            .profile-name-timestamp {
-                text-align: center;
-                line-height: 0.4;
-                margin-left: 5px;
+    //         .profile-name-timestamp {
+    //             text-align: center;
+    //             line-height: 0.4;
+    //             margin-left: 5px;
+    //         }
+    //     }
+
+
+    //     .post-text {
+    //         word-wrap: break-word;
+    //         white-space: pre-wrap;
+    //         word-break: break-word;
+    //         justify-content: center;
+    //         color:white;
+    //         font-size: 18px;
+    //     } 
+
+    //     .comment-footer {
+
+
+    //         .post-reply-comment {
+    //             border-radius: 30px;
+    //             width: 30vw;
+    //             padding:10px;
+    //             border: none;
+    //             resize:none;
+    //             overflow:auto;
+    //         }
+    //     }
+        
+
+    //     .feed-textarea {
+    //         background-color: #434747;
+    //         border: none;
+    //         resize:none;
+    //         overflow:auto;
+    //         width: 40vw;
+    //         color:white;
+    //     }
+    // }
+
+
+
+    .post-header {
+        display:grid;
+        grid-template-columns: 1fr 1fr;
+
+        .post-header-first-col {
+            display: flex;
+
+            .comment-user-ts {
+                display:flex;
+                flex-direction: column;
             }
+
         }
 
-
-        .post-text {
-            word-wrap: break-word;
-            white-space: pre-wrap;
-            word-break: break-word;
-            justify-content: center;
-            color:white;
-            font-size: 18px;
+        .post-header-second-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap:2vw;
+            height:25px;
         }
 
-        .feed-textarea {
-            background-color: #434747;
-            border: none;
-            resize:none;
-            overflow:auto;
-            width: 40vw;
-            color:white;
+    }
+
+    .post-content {
+        color:white;
+    }
+
+    .post-footer {
+        
+        .like-dislike-reply-bar {
+            display:grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            align-items: center;
+            justify-content: space-around;
+
+        }
+
+        .like-dislike-reply-bar div {
+            height:30px;
+            cursor: pointer;
+        }
+
+        .like-dislike-reply-bar div:hover {
+            opacity:0.5;
+            background-color: rgb(105, 105, 105);
+        }
+
+        .reply-section {
+            display:flex;
+            gap:2vw;
+        
         }
     }
 
     .delete-button {
-        display:inline-block;
         background-color: red;
         color:white;
         border-radius: 4px;
         border: none;
-        position:absolute;
-        top:0;
-        right:0;
-        height:3vh;
         cursor: pointer;
 
     }
@@ -65,10 +131,7 @@
         color:white;
         border:none;
         border-radius: 5px;
-        height:3vh;
-        position:absolute;
-        top:0px;
-        right:8vw;
         cursor: pointer;
     }
+
 }

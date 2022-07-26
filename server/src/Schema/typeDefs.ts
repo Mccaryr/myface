@@ -26,6 +26,7 @@ type User {
 
 type Query {
     posts: [Post!]!
+    user_posts(user_id: String): [Post]
     user(user_id: String): User
     users: [User]
 }

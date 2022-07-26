@@ -6,11 +6,11 @@ import CoverPhoto from '../../assets/test_cover_photo.jpg'
 import './Profile.scss'
 import TextareaAutosize from 'react-textarea-autosize';
 import CameraIcon from '../../assets/camera-icon.png'
-import { GET_ALL_POSTS } from '../../Graphql/Queries';
+import { GET_ALL_USER_POSTS } from '../../Graphql/Queries';
 import { CREATE_POST } from '../../Graphql/Mutations';
 import { useMutation, useQuery } from '@apollo/client';
-import { Post } from '../../models/PostModel';
-
+import { Post as PostType } from '../../models/PostModel'
+import Post from '../../components/Post/Post';
 
 
 
@@ -19,7 +19,10 @@ const Profile = () => {
     const uid = useAppSelector((state) => state.user.uid)
     const [user, setUser] = useState<User>()
     const [createPost, {error}] = useMutation(CREATE_POST);
-    const {data: postData} = useQuery(GET_ALL_POSTS) 
+    const {loading, data: postData} = useQuery(GET_ALL_USER_POSTS , {
+      fetchPolicy: 'network-only',
+      variables: {user_id: "ec2bBXvlFcPOf5HIa89CReQmK4I2"}
+    }) 
     const [postInput, setPostInput] = useState<string>('');
 
 
@@ -47,8 +50,8 @@ const Profile = () => {
           const post = await createPost({variables: {
             input: {content: postInput, user_id: uid, profile_url: sessionStorage.getItem('profile_url'), fullname: user?.first_name + " " + user?.last_name}
           }, refetchQueries:[
-            {query:GET_ALL_POSTS},
-            'getAllPosts'
+            {query:GET_ALL_USER_POSTS},
+            'getAllUserPosts'
           ]   
         })
           setPostInput('');
@@ -66,7 +69,6 @@ const Profile = () => {
     }, [])
     
 
-    
 
   return (
     <div className='profile-page'>
@@ -105,22 +107,20 @@ const Profile = () => {
           <div className="create-posts">
             <img src={sessionStorage.getItem('profile_url') as string} style={{height:'100px', width:'100px', borderRadius:'100px'}} />
             <form>
-                <TextareaAutosize minRows={4} style={{width:"35vw", borderRadius:'20px', textAlign:'center', border:'none'}} placeholder="What's on your mind?" value={postInput} onChange={(e) => setPostInput(e.target.value)}/>
+                <TextareaAutosize minRows={4} style={{width:"35vw", borderRadius:'20px', textAlign:'center', border:'none', paddingTop:'15px'}} placeholder="What's on your mind?" value={postInput} onChange={(e) => setPostInput(e.target.value)}/>
             </form>
           </div>
+       
           <div className="user-post-feed">
-            {postData?.posts.map((post: Post) => {
+            {loading && <h1>Loading</h1>}
+            {postData?.user_posts.map((post: PostType) => {
               return (
                 <>
-                <img src={post.profile_url} alt="profile" style={{height:'70px', width:'70px', borderRadius:'100px'}}/>
-                <p>{post.fullname}</p>
-                <p style={{fontSize:"12px"}}>July 24 at 9:41pm</p>
-                <p>{post.content}</p>
+                <Post key={post.id} id={post.id} content={post.content} user_id={post.user_id} profile_url={post.profile_url} fullname={post.fullname} />
                 </>
               )
-                
-            })}
-            
+            })
+          }
           </div>
         </div>
       </div>

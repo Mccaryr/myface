@@ -23,4 +23,7 @@ export class Posts extends BaseEntity {
 
     @Column()
     fullname!: string
+
+    @Column()
+    parentId!: number
 }

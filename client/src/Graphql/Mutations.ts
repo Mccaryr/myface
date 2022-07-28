@@ -9,6 +9,7 @@ export const CREATE_POST = gql`
                 user_id
                 profile_url
                 fullname
+                parentId
             }
     }
 `

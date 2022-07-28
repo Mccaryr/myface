@@ -23,6 +23,12 @@ export const resolvers = {
             const user_id = args.user_id;
             const user_posts = await Posts.findBy({user_id: user_id})
             return user_posts;
+        },
+
+        replies: async(parent: any, args: any) => {
+            const parentId = args.parentId
+            const replies = await Posts.findBy({parentId: parentId})
+            return replies;
         }
     },
 

@@ -3,5 +3,6 @@ export interface Post {
     user_id: string;
     content: string;
     profile_url: string;
-    fullname: string
+    fullname: string;
+    parentId: number;
 }

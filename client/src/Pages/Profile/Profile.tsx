@@ -48,7 +48,7 @@ const Profile = () => {
     const createPostHandler = async () => {
       try {
           const post = await createPost({variables: {
-            input: {content: postInput, user_id: uid, profile_url: sessionStorage.getItem('profile_url'), fullname: user?.first_name + " " + user?.last_name}
+            input: {content: postInput, user_id: uid, profile_url: sessionStorage.getItem('profile_url'), fullname: user?.first_name + " " + user?.last_name, parentId: null}
           }, refetchQueries:[
             {query:GET_ALL_USER_POSTS},
             'getAllUserPosts'
@@ -116,7 +116,7 @@ const Profile = () => {
             {postData?.user_posts.map((post: PostType) => {
               return (
                 <>
-                <Post key={post.id} id={post.id} content={post.content} user_id={post.user_id} profile_url={post.profile_url} fullname={post.fullname} />
+                <Post key={post.id} id={post.id} content={post.content} user_id={post.user_id} profile_url={post.profile_url} fullname={post.fullname} parentId={post.parentId}/>
                 </>
               )
             })

@@ -8,7 +8,8 @@ type Post {
     profile_url: String
     likes: Int 
     dislikes: Int
-    fullname: String!  
+    fullname: String!
+    parentId: Int    
 }
 
 type User {
@@ -29,13 +30,15 @@ type Query {
     user_posts(user_id: String): [Post]
     user(user_id: String): User
     users: [User]
+    replies(parentId: String): [Post]
 }
 
 input CreatePostInput {
     content: String
     user_id: String
     profile_url: String
-    fullname: String  
+    fullname: String
+    parentId: Int   
 }
 
 input UpdatePostInput {

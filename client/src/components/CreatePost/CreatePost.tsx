@@ -19,7 +19,7 @@ const CreatePost: React.FC = () => {
   const createPostHandler = async () => {
     try {
         const post = await createPost({variables: {
-          input: {content: postInput, user_id: uid, profile_url: sessionStorage.getItem('profile_url'), fullname: user?.first_name + " " + user?.last_name}
+          input: {content: postInput, user_id: uid, profile_url: sessionStorage.getItem('profile_url'), fullname: user?.first_name + " " + user?.last_name, parentId: null}
         }, refetchQueries:[
           {query:GET_ALL_POSTS},
           'getAllPosts'

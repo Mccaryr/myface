@@ -9,6 +9,7 @@ export const GET_ALL_POSTS = gql`
             user_id
             profile_url
             fullname
+            parentId
         }
     }
 `
@@ -22,6 +23,20 @@ export const GET_ALL_USER_POSTS = gql`
             user_id
             profile_url
             fullname
+            parentId
+        }
+    }
+`
+
+export const GET_ALL_REPLIES = gql`
+    query getAllReplies($parentId: String) {
+        replies(parentId: $parentId) {
+            id
+            content
+            user_id
+            profile_url
+            fullname
+            parentId
         }
     }
 `

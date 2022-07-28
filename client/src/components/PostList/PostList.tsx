@@ -13,11 +13,11 @@ const PostList = () => {
 
   return (
     <div className='post-list-container'>
-        {postData && postData.posts.map((post: PostType) => {
-          return (
-            <Post key={post.id} id={post.id} content={post.content} user_id={post.user_id} profile_url={post.profile_url} fullname={post.fullname} />
-          )
-        })}
+        {postData && postData.posts.filter((post: PostType) => post.parentId === 0).map((filteredPosts: PostType) => {
+         return (
+           <Post key={filteredPosts.id} id={filteredPosts.id} content={filteredPosts.content} user_id={filteredPosts.user_id} profile_url={filteredPosts.profile_url} fullname={filteredPosts.fullname} parentId={filteredPosts.parentId} />
+         )
+         })}
     </div>
   )
 }

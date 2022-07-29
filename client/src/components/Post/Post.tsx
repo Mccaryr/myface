@@ -2,7 +2,7 @@ import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
 import React, { useEffect, useState } from 'react'
 import TextareaAutosize from 'react-textarea-autosize';
 import { useAppSelector } from '../../app/hooks';
-import { DELETE_POST, UPDATE_POST } from '../../Graphql/Mutations';
+import { DELETE_POST, UPDATE_POST, UPDATE_POST_REACTS } from '../../Graphql/Mutations';
 import { GET_ALL_POSTS, GET_ALL_REPLIES } from '../../Graphql/Queries';
 import DefaultProfileImage from '../../assets/default_profile_image.png'
 import './Post.scss'
@@ -14,15 +14,19 @@ interface Props {
     content: string,
     profile_url: string,
     fullname: string, 
-    parentId: number
+    parentId: number,
+    likes: number, 
+    dislikes: number, 
 }
 
-const Post: React.FC<Props> = ({id, user_id, content, profile_url, fullname, parentId}) => {
+const Post: React.FC<Props> = ({id, user_id, content, profile_url, fullname, parentId, likes, dislikes}) => {
   const uid = useAppSelector((state) => state.user.uid)
   const [canEdit, setCanEdit] = useState<boolean>(false)
+  const [isLiked, setIsLiked] = useState<boolean>(false)
   const [parentPostId, setParentPostId] = useState<number>()
   const [deletePost] = useMutation(DELETE_POST)
   const [updatePost] = useMutation(UPDATE_POST)
+  const [updatePostReacts] = useMutation(UPDATE_POST_REACTS)
   const {data: postData, error, loading, refetch} = useQuery(GET_ALL_POSTS)
   const [getAllReplies, {data: replyData}] = useLazyQuery(GET_ALL_REPLIES, {
     fetchPolicy: 'cache-and-network'
@@ -45,6 +49,18 @@ const Post: React.FC<Props> = ({id, user_id, content, profile_url, fullname, par
     }catch(err) {
       console.log(err)
     }
+  }
+
+  const likeHandler = (id: number,likes: number, dislikes: number) => {
+      setIsLiked(isLiked === true)
+      updatePostReacts({variables: {id: id, likes: likes + 1, dislikes: dislikes}, 
+        refetchQueries:[
+          {query:GET_ALL_POSTS},
+          'getAllUserPosts'
+        ]  
+      })
+
+    
   }
 
   return (
@@ -80,8 +96,12 @@ const Post: React.FC<Props> = ({id, user_id, content, profile_url, fullname, par
           <div className="post-footer">
             <hr style={{color:'white', width:'100%'}}/>
             <div className="like-dislike-reply-bar">
-              <div>likes 17</div> 
-              <div>dislikes 2</div>
+              <div onClick={() => likeHandler(id, likes, dislikes)}>likes {likes}</div> 
+              <div onClick={() => updatePostReacts({variables: {id: id, likes: likes, dislikes: dislikes + 1}, 
+              refetchQueries: [
+                {query:GET_ALL_POSTS},
+                  'getAllUserPosts'
+              ]})}>dislikes {dislikes}</div>
               <div onClick={() => {
                 showRepliesHandler(id)
               }}>Reply 1</div>

@@ -46,6 +46,27 @@ export const UPDATE_POST = gql`
 `
 
 
+export const UPDATE_POST_REACTS = gql`
+    mutation updatePostReacts(
+        $id: ID!
+        $likes: Int 
+        $dislikes: Int 
+        ) {
+            updatePostReacts(
+                id: $id 
+                likes: $likes 
+                dislikes: $dislikes 
+            )
+            {
+                id 
+                likes
+                dislikes
+            }
+        }
+`
+
+
+
 
 export const CREATE_USER = gql`
     mutation createUser($input: CreateUserInput) {

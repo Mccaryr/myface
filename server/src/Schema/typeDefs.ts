@@ -26,7 +26,7 @@ type User {
 }
 
 type Query {
-    posts: [Post!]!
+    posts: [Post]
     user_posts(user_id: String): [Post]
     user(user_id: String): User
     users: [User]
@@ -71,6 +71,7 @@ input CreateUserInput {
 type Mutation {
     createPost(input: CreatePostInput): Post
     updatePost(id: ID, content:String, newContent:String): Post
+    updatePostReacts(id: ID, likes: Int, dislikes: Int): Post 
     deletePost(id: ID!): Post
     createUser(input: CreateUserInput): User
 }

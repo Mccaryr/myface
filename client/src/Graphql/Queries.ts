@@ -10,6 +10,8 @@ export const GET_ALL_POSTS = gql`
             profile_url
             fullname
             parentId
+            likes 
+            dislikes 
         }
     }
 `
@@ -24,6 +26,8 @@ export const GET_ALL_USER_POSTS = gql`
             profile_url
             fullname
             parentId
+            likes 
+            dislikes
         }
     }
 `

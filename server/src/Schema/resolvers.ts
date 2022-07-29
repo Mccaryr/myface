@@ -43,6 +43,10 @@ export const resolvers = {
             let postUpdated = await Posts.update({id: id}, {content: newContent})
             return args
         },
+        updatePostReacts: async (parent: any, args: any) => {
+            const reacts = args
+            let updatedPostReacts = await Posts.update({id: reacts.id}, {likes: reacts.likes, dislikes: reacts.dislikes})
+        },
         deletePost: async (parent: any, args: any) => {
             const id = args.id;
             let postDeleted = await Posts.delete(id)

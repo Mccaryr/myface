@@ -5,4 +5,6 @@ export interface Post {
     profile_url: string;
     fullname: string;
     parentId: number;
+    likes: number;
+    dislikes: number;
 }

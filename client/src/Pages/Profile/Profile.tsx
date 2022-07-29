@@ -113,14 +113,12 @@ const Profile = () => {
        
           <div className="user-post-feed">
             {loading && <h1>Loading</h1>}
-            {postData?.user_posts.map((post: PostType) => {
-              return (
-                <>
-                <Post key={post.id} id={post.id} content={post.content} user_id={post.user_id} profile_url={post.profile_url} fullname={post.fullname} parentId={post.parentId}/>
-                </>
+            {postData?.user_posts.filter((user_post: PostType) => user_post.parentId === 0).map((filteredUserPosts: PostType) => {
+              return(
+                <Post key={filteredUserPosts.id} id={filteredUserPosts.id} content={filteredUserPosts.content} user_id={filteredUserPosts.user_id} 
+                profile_url={filteredUserPosts.profile_url} fullname={filteredUserPosts.fullname} parentId={filteredUserPosts.parentId} likes={filteredUserPosts.likes} dislikes={filteredUserPosts.dislikes}/>
               )
-            })
-          }
+            })}
           </div>
         </div>
       </div>

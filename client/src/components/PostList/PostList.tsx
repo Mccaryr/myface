@@ -15,7 +15,8 @@ const PostList = () => {
     <div className='post-list-container'>
         {postData && postData.posts.filter((post: PostType) => post.parentId === 0).map((filteredPosts: PostType) => {
          return (
-           <Post key={filteredPosts.id} id={filteredPosts.id} content={filteredPosts.content} user_id={filteredPosts.user_id} profile_url={filteredPosts.profile_url} fullname={filteredPosts.fullname} parentId={filteredPosts.parentId} />
+           <Post key={filteredPosts.id} id={filteredPosts.id} content={filteredPosts.content} user_id={filteredPosts.user_id} 
+           profile_url={filteredPosts.profile_url} fullname={filteredPosts.fullname} parentId={filteredPosts.parentId} likes={filteredPosts.likes} dislikes={filteredPosts.dislikes}/>
          )
          })}
     </div>

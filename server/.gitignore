@@ -18,8 +18,6 @@
 .env.development.local
 .env.test.local
 .env.production.local
-src/assets/background-video.mp4
-src/assets/create_account_vid.mp4 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

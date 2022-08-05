@@ -1,0 +1,47 @@
+.create-message-modal-container {
+    margin-top: 5vh;
+    background-color: rgb(59, 121, 77);
+    color:white;
+    z-index: 10;
+    position:absolute;
+    left:25%;
+    right:25%;
+    padding:20px;
+    width:50vw;
+    display:flex;
+    flex-direction: column;
+    border-radius: 20px;
+    
+    
+    .compose-message-form {
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap:2vh;
+
+        .compose-message-search {
+        
+
+            input {
+                border-radius: 10px;
+                width:15vw;
+                height:30px;
+            }
+
+            .person-search-dropdown {
+                display: flex;
+                gap:2vw;
+                background-color: gray;
+                cursor: pointer;
+
+                img {
+                    height:50px;
+                    width:50px;
+                    border-radius: 100px;
+                     
+                }
+            }
+        }
+    }
+}

@@ -12,18 +12,20 @@
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
-            background-color: gray;
+            background-color: rgb(70, 68, 68);
             padding:0 15px 0 15px;
             
             button {
                 border: none;
-                background-color: gray;
+                background-color: transparent;
                 color: white;
+              
             }
 
             button:hover {
                 color: var(--primary-color);
-                cursor:pointer
+                cursor:pointer;
+                transform: scale(1.2)
             }
 
         }

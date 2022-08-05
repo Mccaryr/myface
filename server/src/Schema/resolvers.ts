@@ -8,9 +8,18 @@ export const resolvers = {
            return posts;
         },
 
-        users: async () => {
+        users: async (parent: any, args: any) => {
+            const filter_name = args.filter_name 
             const users = await User.find()
-            return users;
+
+            if(filter_name.length > 0) {
+                return users.filter((user) => user.first_name.includes(filter_name) || user.last_name.includes(filter_name));
+            }
+            else {
+                return "none selected"
+            }
+            
+            
         },
 
         user: async (parent: any, args: any) => {

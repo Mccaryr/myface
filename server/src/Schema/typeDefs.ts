@@ -40,7 +40,7 @@ type Query {
     posts: [Post]
     user_posts(user_id: String): [Post]
     user(user_id: String): User
-    users: [User]
+    users(filter_name: String): [User]
     replies(parentId: String): [Post]
     messages(receiver_id: String): [Message]
 }

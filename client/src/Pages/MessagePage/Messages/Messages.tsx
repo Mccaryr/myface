@@ -1,9 +1,12 @@
 import React from 'react'
 import { useState } from 'react'
 import Chats from '../Chats/Chats'
+import CreateMessageModal from '../CreateMessageModal/CreateMessageModal'
 import './Messages.scss'
 
 const Messages = () => {
+
+  const [composeMessageModal, setComposeMessageModal] = useState<boolean>(false)
 
 
   return (
@@ -11,13 +14,14 @@ const Messages = () => {
       <div className="chats-col">
         <div className="chats-col-header">
           <h3>Chats</h3>
-          <button>Compose Message</button>
+          <button onClick={() => setComposeMessageModal(true)}>Compose Message</button>
         </div>
         <div className="chats-col-search">
           <input type="text" placeholder="Search Messages" />
         </div>
         <Chats />
       </div>
+      {composeMessageModal && <CreateMessageModal toggle={setComposeMessageModal}/>}
       <div className="messages-col">
         Messages Column 
       </div>

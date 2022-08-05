@@ -58,3 +58,15 @@ export const GET_USER = gql`
         }
     }
 `
+
+export const GET_USERS = gql`
+
+    query Users($filter_name: String!) {
+        users(filter_name: $filter_name) {
+             profile_url
+             first_name 
+             last_name
+             user_id
+        }
+    }
+`

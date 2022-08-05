@@ -5,6 +5,18 @@
     margin-top: 2vh;
     color: var(--primary-color);
 
+    video {
+        z-index: -10;
+        position:fixed;
+        width:100vw;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+        object-fit:cover;
+        height:100vh;
+    }
+
     
     .signup-form {
         display:flex;

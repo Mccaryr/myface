@@ -1,4 +1,4 @@
-import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
+import { useLazyQuery, useMutation, useQuery, makeVar } from '@apollo/client';
 import React, { useEffect, useState } from 'react'
 import TextareaAutosize from 'react-textarea-autosize';
 import { useAppSelector } from '../../app/hooks';
@@ -23,6 +23,7 @@ const Post: React.FC<Props> = ({id, user_id, content, profile_url, fullname, par
   const uid = useAppSelector((state) => state.user.uid)
   const [canEdit, setCanEdit] = useState<boolean>(false)
   const [isLiked, setIsLiked] = useState<boolean>(false)
+  const [isDisliked, setIsDisliked] = useState<boolean>(false)
   const [parentPostId, setParentPostId] = useState<number>()
   const [deletePost] = useMutation(DELETE_POST)
   const [updatePost] = useMutation(UPDATE_POST)
@@ -32,7 +33,7 @@ const Post: React.FC<Props> = ({id, user_id, content, profile_url, fullname, par
     fetchPolicy: 'cache-and-network'
   })
   const [currentContent, setCurrentContent] = useState<string>('');
-  const [newContent, setNewContent] = useState<string>('');  
+  const [newContent, setNewContent] = useState<string>('');
 
 
 
@@ -51,16 +52,23 @@ const Post: React.FC<Props> = ({id, user_id, content, profile_url, fullname, par
     }
   }
 
-  const likeHandler = (id: number,likes: number, dislikes: number) => {
-      setIsLiked(isLiked === true)
+  const likeHandler = async(id: number,likes: number, dislikes: number) => {
       updatePostReacts({variables: {id: id, likes: likes + 1, dislikes: dislikes}, 
         refetchQueries:[
           {query:GET_ALL_POSTS},
           'getAllUserPosts'
         ]  
       })
+  }
 
-    
+  const dislikeHandler =  (id: number,likes: number, dislikes: number) => {
+    setIsLiked(isLiked === true)
+    updatePostReacts({variables: {id: id, likes: likes + 1, dislikes: dislikes}, 
+      refetchQueries:[
+        {query:GET_ALL_POSTS},
+        'getAllUserPosts'
+      ]  
+    })
   }
 
   return (
@@ -97,11 +105,14 @@ const Post: React.FC<Props> = ({id, user_id, content, profile_url, fullname, par
             <hr style={{color:'white', width:'100%'}}/>
             <div className="like-dislike-reply-bar">
               <div onClick={() => likeHandler(id, likes, dislikes)}>likes {likes}</div> 
-              <div onClick={() => updatePostReacts({variables: {id: id, likes: likes, dislikes: dislikes + 1}, 
+              <div onClick={() => {
+                setIsDisliked(isDisliked === true);
+                updatePostReacts({variables: {id: id, likes: likes, dislikes: dislikes + 1}, 
               refetchQueries: [
                 {query:GET_ALL_POSTS},
                   'getAllUserPosts'
-              ]})}>dislikes {dislikes}</div>
+              ]})
+              }}>dislikes {dislikes}</div>
               <div onClick={() => {
                 showRepliesHandler(id)
               }}>Reply 1</div>

@@ -7,6 +7,7 @@ import './SignUp.scss'
 import { useMutation } from '@apollo/client'
 import { CREATE_USER } from '../../Graphql/Mutations'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import backgroundVideo from '../../assets/create_account_vid.mp4'
 
 const SignUp = () => {
     const navigate = useNavigate()
@@ -103,6 +104,11 @@ const SignUp = () => {
 
   return (
     <div className="signup-page">
+        <video autoPlay muted loop>
+            <source src={backgroundVideo} type="video/mp4"/>
+        </video>
+
+
         <div className='signup-form'>
         <h1>Create your account</h1>
         {errorText && <span style={{color:"red", fontSize:'18px'}}>{errorText}</span>}

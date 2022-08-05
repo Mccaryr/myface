@@ -9,7 +9,7 @@ import { useAppDispatch } from './app/hooks';
 import Profile from './Pages/Profile/Profile';
 import SignUp from './Pages/SignUp/SignUp';
 import Header from './components/Header/Header';
-import Messages from './Pages/Messages/Messages';
+import Messages from './Pages/MessagePage/Messages/Messages';
 
 function App() {
   const signedIn = useAppSelector((state) => state.user.signedIn)

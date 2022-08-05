@@ -6,6 +6,8 @@ import './Login.scss'
 import { useNavigate } from 'react-router-dom'
 import { useLazyQuery } from '@apollo/client'
 import { GET_USER } from '../../Graphql/Queries'
+import backgroundVideo from '../../assets/background-video.mp4' 
+ 
 
 const Login = () => {
     const [emailInput, setEmailInput] = useState<string>('')
@@ -47,6 +49,10 @@ const Login = () => {
     
 
   return (
+  <div className="login-page">
+    <video autoPlay muted loop>
+        <source src={backgroundVideo} type="video/mp4"/>
+    </video>
     <div className='login-container'>
         <div className='login-form'>
             <h1>MyFace Social</h1>
@@ -60,6 +66,7 @@ const Login = () => {
             </form>
         </div>
     </div>
+  </div>
   )
 }
 

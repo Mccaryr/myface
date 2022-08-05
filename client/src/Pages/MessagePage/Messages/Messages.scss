@@ -40,30 +40,6 @@
             }
             
         }
-
-        .chats-preview {
-            display:flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            margin-top: 2vh;
-            gap:1vw;
-            
-
-            h4 {
-                display:flex;
-                padding:0;
-                margin:0;
-            }
-
-            p {
-                font-size: 12px;
-                width:20vw;
-                
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                overflow: hidden;
-            }
-        }
         
     }
 }

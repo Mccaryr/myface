@@ -25,12 +25,24 @@ type User {
     friends: [User]
 }
 
+type Message {
+    id:ID!
+    content: String!
+    receiver_id: String!
+    sender_id: String!
+    profile_url: String
+    first_name: String 
+    last_name: String
+    created_ts: String  
+}
+
 type Query {
     posts: [Post]
     user_posts(user_id: String): [Post]
     user(user_id: String): User
     users: [User]
     replies(parentId: String): [Post]
+    messages(receiver_id: String): [Message]
 }
 
 input CreatePostInput {
@@ -68,11 +80,22 @@ input CreateUserInput {
     friends: [UserInput]
 }
 
+input CreateMessageInput {
+    content: String!
+    receiver_id: String!
+    sender_id: String!
+    profile_url: String
+    first_name: String 
+    last_name: String
+    created_ts: String  
+}
+
 type Mutation {
     createPost(input: CreatePostInput): Post
     updatePost(id: ID, content:String, newContent:String): Post
     updatePostReacts(id: ID, likes: Int, dislikes: Int): Post 
     deletePost(id: ID!): Post
     createUser(input: CreateUserInput): User
+    createMessage(input: CreateMessageInput): Message 
 }
 `

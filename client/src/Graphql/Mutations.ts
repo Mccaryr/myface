@@ -82,3 +82,16 @@ export const CREATE_USER = gql`
         }
     }
 `
+
+export const CREATE_MESSAGE = gql`
+    mutation createMessage($input: CreateMessageInput) {
+        createMessage(input: $input) {
+            content 
+            sender_id
+            receiver_id
+            first_name
+            last_name
+            profile_url 
+        }
+    }
+`

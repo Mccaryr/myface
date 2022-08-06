@@ -26,14 +26,13 @@ type User {
 }
 
 type Message {
-    id:ID!
+    _id:ID!
     content: String!
     receiver_id: String!
     sender_id: String!
     profile_url: String
     first_name: String 
     last_name: String
-    created_ts: String  
 }
 
 type Query {
@@ -87,7 +86,6 @@ input CreateMessageInput {
     profile_url: String
     first_name: String 
     last_name: String
-    created_ts: String  
 }
 
 type Mutation {

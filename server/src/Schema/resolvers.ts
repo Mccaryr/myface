@@ -1,5 +1,6 @@
 import { Posts } from "../Entities/Post"
 import { User } from "../Entities/User"
+import { Message } from "../Entities/Message"
 
 export const resolvers = {
     Query: {
@@ -65,6 +66,12 @@ export const resolvers = {
             const user = args.input
             let createdUser = User.create(user)
             return createdUser;
+        },
+        createMessage: async(parent: any, args: {input: any}) => {
+            const message = args.input 
+            console.log("Got to resolver", message)
+            let createdMessage = Message.create(message)
+            return createdMessage
         }
     }
 }

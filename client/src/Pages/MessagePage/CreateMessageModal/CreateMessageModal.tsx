@@ -1,15 +1,24 @@
 import { useState } from 'react';
 import './CreateMessageModal.scss'
 import TextareaAutosize from 'react-textarea-autosize';
-import { useLazyQuery } from '@apollo/client';
+import { useLazyQuery, useMutation } from '@apollo/client';
 import { GET_USERS } from '../../../Graphql/Queries';
+import { CREATE_MESSAGE } from '../../../Graphql/Mutations';
 
 const CreateMessageModal = (props: any) => {
     const [getFilteredUsers, {data: usersData}] = useLazyQuery(GET_USERS, {
         fetchPolicy: 'cache-and-network'
       })
+    const [createMesage, {error}] = useMutation(CREATE_MESSAGE)
     const setComposeMessageModal = props.toggle
-    const [selectedProfile, setSelectedProfile] = useState<any>({}) 
+    const [messageReceiver, setMessageReceiver] = useState<any>({})
+    const [messageContent, setMessageContent] = useState<String>('')
+    
+    const createMessageHandler = async () => {
+      await createMesage({variables: {input: 
+        {first_name: messageReceiver.first_name, last_name: messageReceiver.last_name, profile_url: messageReceiver.profile_url, 
+            sender_id: sessionStorage.getItem('uid'), receiver_id: messageReceiver.user_id, content: messageContent}}})
+    }
 
   return (
     <div className="create-message-modal-container">
@@ -17,12 +26,12 @@ const CreateMessageModal = (props: any) => {
         <form>
             <div className="compose-message-form">
                 <div className='compose-message-search'>
-                    {selectedProfile ? 
+                    {messageReceiver ? 
                    
-                    <div key={selectedProfile.user_id}>
-                        <img src={selectedProfile.profile_url}  alt="profile"/>
-                        <p>{selectedProfile.first_name} {selectedProfile.last_name}</p>
-                        <button onClick={() => setSelectedProfile(null)}>Clear</button>
+                    <div key={messageReceiver.user_id}>
+                        <img src={messageReceiver.profile_url}  alt="profile"/>
+                        <p>{messageReceiver.first_name} {messageReceiver.last_name}</p>
+                        <button onClick={() => setMessageReceiver(null)}>Clear</button>
                     </div>
                     :
                     <>
@@ -30,9 +39,9 @@ const CreateMessageModal = (props: any) => {
                     <input type="search"  style={{textAlign:'center'}} placeholder="first or last name"  onChange={(e) => getFilteredUsers({variables: {filter_name: e.target.value}})}/>
                     </>
                     }
-                    {usersData && !selectedProfile && usersData.users.map((user: any) => {
+                    {usersData && !messageReceiver && usersData.users.map((user: any) => {
                         return (
-                        <div key={user.user_id} className="person-search-dropdown" onClick={() => setSelectedProfile(user)}>
+                        <div key={user.user_id} className="person-search-dropdown" onClick={() => setMessageReceiver(user)}>
                             <img src={user.profile_url}  alt="profile"/>
                             <p>{user.first_name} {user.last_name}</p>
                         </div>
@@ -41,9 +50,9 @@ const CreateMessageModal = (props: any) => {
                     }
                 </div>
                 <div>
-                    <TextareaAutosize minRows={4} style={{width:"25vw", borderRadius:'5px'}}/>
+                    <TextareaAutosize minRows={4} style={{width:"25vw", borderRadius:'5px'}} onChange={(e) => setMessageContent(e.target.value)}/>
                 </div>
-                <button style={{borderRadius:'10px', width:'10vw', height:'40px', backgroundColor:'green', color:'white', cursor:'pointer'}}>Submit Message</button>
+                <button style={{borderRadius:'10px', width:'10vw', height:'40px', backgroundColor:'green', color:'white', cursor:'pointer'}} onClick={() => createMessageHandler()}>Submit Message</button>
             </div>
         </form>
     </div>

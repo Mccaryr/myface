@@ -78,7 +78,6 @@ export const CREATE_USER = gql`
             job 
             profile_url
             email
-            fullname
             location 
         }
     }

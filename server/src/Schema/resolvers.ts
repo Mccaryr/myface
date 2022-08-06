@@ -62,7 +62,6 @@ export const resolvers = {
             return null;
         },
         createUser: async(parent: any, args: {input: any}) => {
-            const {user_id, email, profile_url, first_name, last_name, job, friends} = args.input
             const user = args.input
             let createdUser = User.create(user)
             return createdUser;

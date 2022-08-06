@@ -72,10 +72,10 @@ const Profile = () => {
 
   return (
     <div className='profile-page'>
+      <div className="cover-photo-and-profile-container">
+        <img alt='cover' className='cover-photo' src={CoverPhoto} />
+        <button className='edit-cover-button'>Edit Cover Photo</button>
         {user?.profile_url ?
-        <div className="cover-photo-and-profile-container">
-          <img alt='cover' className='cover-photo' src={CoverPhoto} />
-          <button className='edit-cover-button'>Edit Cover Photo</button>
           <div className='profile-image-and-name-container'> 
             <div className="profile-image">
               <img alt='profile' src={user.profile_url} />
@@ -85,14 +85,14 @@ const Profile = () => {
                 {user?.first_name} {user?.last_name}
             </div> 
           </div>
-        </div>
-      
-        : 
+      // </div>
+        :
         <div>
           <input type="file" onChange={(e) => fileSelectedHandler(e)} />
           <img alt='uploaded' style={{height:'200px', width:'200px', borderRadius:'100px'}} src={uploadedImage} />
-        </div>
+        </div> 
       }
+      </div>
       <div className='posts-aboutme-container'>
         <div className="about-me">
           <div className="intro">

@@ -44,4 +44,18 @@
         }
         
     }
+
+    .messages-col {
+        height:90vh;
+        align-items: center;
+        display:flex;
+        flex-direction: column;
+
+        .compose-message {
+            position:absolute;
+            margin-bottom: 0;
+            padding-bottom: 0;
+            bottom:0px;
+        }
+    }
 }

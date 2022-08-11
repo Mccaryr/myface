@@ -91,7 +91,8 @@ export const CREATE_MESSAGE = gql`
             receiver_id
             first_name
             last_name
-            profile_url 
+            profile_url
+            conversation_id 
         }
     }
 `

@@ -27,12 +27,14 @@ type User {
 
 type Message {
     _id:ID!
+    conversation_id: ID!
     content: String!
     receiver_id: String!
     sender_id: String!
     profile_url: String
     first_name: String 
     last_name: String
+    createdAt: String
 }
 
 type Query {
@@ -42,6 +44,7 @@ type Query {
     users(filter_name: String): [User]
     replies(parentId: String): [Post]
     messages(receiver_id: String): [Message]
+    user_chats(user_id: String): [Message]
 }
 
 input CreatePostInput {
@@ -80,6 +83,7 @@ input CreateUserInput {
 }
 
 input CreateMessageInput {
+    conversation_id: ID!
     content: String!
     receiver_id: String!
     sender_id: String!

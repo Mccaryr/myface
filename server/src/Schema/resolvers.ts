@@ -1,6 +1,8 @@
+import mongoose from 'mongoose'
 import { Posts } from "../Entities/Post"
 import { User } from "../Entities/User"
 import { Message } from "../Entities/Message"
+import _ from 'lodash'
 
 export const resolvers = {
     Query: {
@@ -39,6 +41,33 @@ export const resolvers = {
             const parentId = args.parentId
             const replies = await Posts.findBy({parentId: parentId})
             return replies;
+        },
+        user_chats: async (parent: any, args: any) => {
+            const user_id = args.user_id;
+            const chats = await Message.find({$or:[{sender_id: user_id}, {receiver_id: user_id}]})
+            
+              let uniqueConversations = chats.map((chat) => chat.conversation_id);
+              uniqueConversations = [...new Set(uniqueConversations)];
+              let recentUniqueConversations = []
+
+              for(let i = 0; i < uniqueConversations.length; i++) {
+                let filteredChats = chats.filter((chat) => chat.conversation_id === uniqueConversations[i])
+                let sortedChats = filteredChats.sort((a,b) => {
+                    if(a.createdAt > b.createdAt) {
+                        return -1
+                    } if(a.createdAt < b.createdAt){
+                        return 1
+                    } else {
+                        return 0
+                    }
+                })
+                recentUniqueConversations.push(sortedChats[0])
+              }
+             
+            // console.log(_.sortBy(chats, 'createdAt').at(-1)) 
+            //Still needs to be tested but using lodash looks promising
+            console.log(chats)
+            return chats;
         }
     },
 
@@ -64,13 +93,17 @@ export const resolvers = {
         },
         createUser: async(parent: any, args: {input: any}) => {
             const user = args.input
-            let createdUser = User.create(user)
+            let createdUser = await User.create(user)
             return createdUser;
         },
         createMessage: async(parent: any, args: {input: any}) => {
             const message = args.input 
-            console.log("Got to resolver", message)
-            let createdMessage = Message.create(message)
+            if(message.conversation_id === "") {
+                message.conversation_id = new mongoose.Types.ObjectId(); 
+                console.log(message)
+            }
+            
+            let createdMessage = await Message.create(message)
             return createdMessage
         }
     }

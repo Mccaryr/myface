@@ -70,3 +70,33 @@ export const GET_USERS = gql`
         }
     }
 `
+
+export const GET_ALL_USER_CHATS = gql`
+
+    query getAllUserChats($user_id: String) {
+       user_chats(user_id: $user_id) { 
+            content
+            receiver_id
+            sender_id
+            profile_url
+            first_name
+            last_name
+            createdAt
+        }
+    }
+`
+
+export const GET_ALL_USER_MESSAGES = gql`
+
+    query getAllUserMessages($user_id: String) {
+       user_messages(user_id: $user_id) { 
+            content
+            receiver_id
+            sender_id
+            profile_url
+            first_name
+            last_name
+            createdAt
+        }
+    }
+`

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './CreateMessageModal.scss'
+import { uuid } from 'uuidv4';
 import TextareaAutosize from 'react-textarea-autosize';
 import { useLazyQuery, useMutation } from '@apollo/client';
 import { GET_USERS } from '../../../Graphql/Queries';
@@ -9,24 +10,25 @@ const CreateMessageModal = (props: any) => {
     const [getFilteredUsers, {data: usersData}] = useLazyQuery(GET_USERS, {
         fetchPolicy: 'cache-and-network'
       })
-    const [createMesage, {error}] = useMutation(CREATE_MESSAGE)
+    const [createMessage, {error}] = useMutation(CREATE_MESSAGE)
     const setComposeMessageModal = props.toggle
     const [messageReceiver, setMessageReceiver] = useState<any>({})
+    const [searchText, setSearchText] = useState<String>('')
     const [messageContent, setMessageContent] = useState<String>('')
     
     const createMessageHandler = async () => {
-      await createMesage({variables: {input: 
+      await createMessage({variables: {input: 
         {first_name: messageReceiver.first_name, last_name: messageReceiver.last_name, profile_url: messageReceiver.profile_url, 
-            sender_id: sessionStorage.getItem('uid'), receiver_id: messageReceiver.user_id, content: messageContent}}})
+            sender_id: sessionStorage.getItem('uid'), receiver_id: messageReceiver.user_id, content: messageContent, conversation_id: ""}}})
     }
 
-  return (
+    return (
     <div className="create-message-modal-container">
         <button style={{top:0, right:0, position:'absolute', backgroundColor:'red', color:'white', borderRadius:'20px', width:'30px', height:'30px'}} onClick={() => setComposeMessageModal(false)}>x</button>
         <form>
             <div className="compose-message-form">
                 <div className='compose-message-search'>
-                    {messageReceiver ? 
+                    {messageReceiver  ? 
                    
                     <div key={messageReceiver.user_id}>
                         <img src={messageReceiver.profile_url}  alt="profile"/>

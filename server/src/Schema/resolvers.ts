@@ -3,6 +3,7 @@ import { Posts } from "../Entities/Post"
 import { User } from "../Entities/User"
 import { Message } from "../Entities/Message"
 import _ from 'lodash'
+import { CreateDateColumn } from 'typeorm'
 
 export const resolvers = {
     Query: {
@@ -45,29 +46,26 @@ export const resolvers = {
         user_chats: async (parent: any, args: any) => {
             const user_id = args.user_id;
             const chats = await Message.find({$or:[{sender_id: user_id}, {receiver_id: user_id}]})
-            
               let uniqueConversations = chats.map((chat) => chat.conversation_id);
-              uniqueConversations = [...new Set(uniqueConversations)];
-              let recentUniqueConversations = []
+              uniqueConversations = [...new Set(uniqueConversations)]
+              let recentUniqueConversations: any = []
 
               for(let i = 0; i < uniqueConversations.length; i++) {
                 let filteredChats = chats.filter((chat) => chat.conversation_id === uniqueConversations[i])
-                let sortedChats = filteredChats.sort((a,b) => {
-                    if(a.createdAt > b.createdAt) {
-                        return -1
-                    } if(a.createdAt < b.createdAt){
-                        return 1
-                    } else {
-                        return 0
-                    }
-                })
-                recentUniqueConversations.push(sortedChats[0])
+                let mostRecentChat = _.sortBy(filteredChats, 'createdAt').at(-1)
+                recentUniqueConversations.push(mostRecentChat)
               }
-             
-            // console.log(_.sortBy(chats, 'createdAt').at(-1)) 
-            //Still needs to be tested but using lodash looks promising
-            console.log(chats)
-            return chats;
+
+              recentUniqueConversations.forEach((convos: any) => {
+                convos.date_string = convos.createdAt.toLocaleString()
+              })
+            return recentUniqueConversations;
+        },
+        user_messages: async(parent: any, args: any) => {
+            const conversation_id = args.conversation_id 
+            const messages = await Message.find({conversation_id: conversation_id})
+            
+            return messages 
         }
     },
 
@@ -99,8 +97,7 @@ export const resolvers = {
         createMessage: async(parent: any, args: {input: any}) => {
             const message = args.input 
             if(message.conversation_id === "") {
-                message.conversation_id = new mongoose.Types.ObjectId(); 
-                console.log(message)
+                message.conversation_id = new mongoose.Types.ObjectId().toString(); 
             }
             
             let createdMessage = await Message.create(message)

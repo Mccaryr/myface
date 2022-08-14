@@ -82,14 +82,16 @@ export const GET_ALL_USER_CHATS = gql`
             first_name
             last_name
             createdAt
+            date_string
+            conversation_id
         }
     }
 `
 
 export const GET_ALL_USER_MESSAGES = gql`
 
-    query getAllUserMessages($user_id: String) {
-       user_messages(user_id: $user_id) { 
+    query getAllUserMessages($conversation_id: String) {
+       user_messages(conversation_id: $conversation_id) { 
             content
             receiver_id
             sender_id

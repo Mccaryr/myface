@@ -21,7 +21,7 @@ const Profile = () => {
     const [createPost, {error}] = useMutation(CREATE_POST);
     const {loading, data: postData} = useQuery(GET_ALL_USER_POSTS , {
       fetchPolicy: 'network-only',
-      variables: {user_id: "ec2bBXvlFcPOf5HIa89CReQmK4I2"}
+      variables: {user_id: sessionStorage.getItem('uid')}
     }) 
     const [postInput, setPostInput] = useState<string>('');
 
@@ -85,7 +85,6 @@ const Profile = () => {
                 {user?.first_name} {user?.last_name}
             </div> 
           </div>
-      // </div>
         :
         <div>
           <input type="file" onChange={(e) => fileSelectedHandler(e)} />

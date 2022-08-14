@@ -28,12 +28,12 @@ const CreateMessageModal = (props: any) => {
         <form>
             <div className="compose-message-form">
                 <div className='compose-message-search'>
-                    {messageReceiver  ? 
+                    {Object.keys(messageReceiver).length > 0 ? 
                    
                     <div key={messageReceiver.user_id}>
                         <img src={messageReceiver.profile_url}  alt="profile"/>
                         <p>{messageReceiver.first_name} {messageReceiver.last_name}</p>
-                        <button onClick={() => setMessageReceiver(null)}>Clear</button>
+                        <button style={{borderRadius:'10px', width:'10vw', height:'40px', backgroundColor:'green', color:'white', cursor:'pointer'}} onClick={() => setMessageReceiver({})}>Clear</button>
                     </div>
                     :
                     <>
@@ -41,7 +41,7 @@ const CreateMessageModal = (props: any) => {
                     <input type="search"  style={{textAlign:'center'}} placeholder="first or last name"  onChange={(e) => getFilteredUsers({variables: {filter_name: e.target.value}})}/>
                     </>
                     }
-                    {usersData && !messageReceiver && usersData.users.map((user: any) => {
+                    {usersData && Object.keys(messageReceiver).length === 0 && usersData.users.map((user: any) => {
                         return (
                         <div key={user.user_id} className="person-search-dropdown" onClick={() => setMessageReceiver(user)}>
                             <img src={user.profile_url}  alt="profile"/>

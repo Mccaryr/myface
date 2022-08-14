@@ -12,6 +12,8 @@ type Post {
     parentId: Int    
 }
 
+
+
 type User {
     _id: ID
     user_id: String
@@ -27,7 +29,7 @@ type User {
 
 type Message {
     _id:ID!
-    conversation_id: ID!
+    conversation_id: String!
     content: String!
     receiver_id: String!
     sender_id: String!
@@ -35,6 +37,7 @@ type Message {
     first_name: String 
     last_name: String
     createdAt: String
+    date_string: String
 }
 
 type Query {
@@ -43,7 +46,7 @@ type Query {
     user(user_id: String): User
     users(filter_name: String): [User]
     replies(parentId: String): [Post]
-    messages(receiver_id: String): [Message]
+    user_messages(conversation_id: String): [Message]
     user_chats(user_id: String): [Message]
 }
 
@@ -83,7 +86,7 @@ input CreateUserInput {
 }
 
 input CreateMessageInput {
-    conversation_id: ID!
+    conversation_id: String!
     content: String!
     receiver_id: String!
     sender_id: String!

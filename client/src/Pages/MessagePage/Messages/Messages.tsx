@@ -3,17 +3,33 @@ import { useState } from 'react'
 import Chats from '../Chats/Chats'
 import CreateMessageModal from '../CreateMessageModal/CreateMessageModal'
 import TextareaAutosize from 'react-textarea-autosize';
-import { useMutation } from '@apollo/client';
+import { useMutation, useLazyQuery } from '@apollo/client';
 import { CREATE_MESSAGE } from '../../../Graphql/Mutations';
 import './Messages.scss'
+import { GET_ALL_USER_MESSAGES } from '../../../Graphql/Queries';
+
+
+// interface Message {
+//   content: String 
+//   conversation_id: String 
+//   createdAt: String 
+//   date_string: String 
+//   first_name: String 
+//   last_name: String 
+//   profile_url: String 
+//   receiver_id: String 
+//   sender_id: String 
+// }
 
 const Messages = () => {
 
   const [composeMessageModal, setComposeMessageModal] = useState<boolean>(false)
-  const [profileSelected, setProfileSelected] = useState<boolean>(false)
+  const [profileSelected, setProfileSelected] = useState<any>({})
   const [messageContent, setMessageContent] = useState<String>('')
   const [messageReceiver, setMessageReceiver] = useState<any>({})
+  const [messages, setMessages] = useState<any>([])
   const [createMesage, {error}] = useMutation(CREATE_MESSAGE)
+  const [getMessagesFromChat, {data: messageData}] = useLazyQuery(GET_ALL_USER_MESSAGES)
 
   const createMessageHandler = async (e: any) => {
     setMessageContent(e.target.value)
@@ -25,7 +41,6 @@ const Messages = () => {
     }
   }
 
-
   return (
     <div className='Messages-page-container'>
       <div className="chats-col">
@@ -36,20 +51,31 @@ const Messages = () => {
         <div className="chats-col-search">
           <input type="text" placeholder="Search Messages" />
         </div>
-        <Chats profileSelected={setProfileSelected}/>
+        <Chats profileSelected={setProfileSelected} setMessages={setMessages} getMessagesFromChat={getMessagesFromChat}/>
       </div>
       {composeMessageModal && <CreateMessageModal toggle={setComposeMessageModal}/>}
       <div className="messages-col">
-        Messages Column
-        {profileSelected && 
+        <h2>Messages</h2>
+        {messageData && messageData?.user_messages?.map((message: any) => {
+          return (
+              <div key={message.createdAt} className='message-container'>
+                <img src={message.profile_url} style={{height:'50px', width:'50px', borderRadius:'100px', marginRight:'15px'}}/>
+                <p>{message.content}</p>
+              </div>
+          )
+        })}
+        {Object.keys(profileSelected).length > 0 && 
           <div className="compose-message">
-          <TextareaAutosize minRows={4} style={{width:"35vw", borderRadius:'5px'}} onChange={(e) => createMessageHandler(e)}/>
-        </div>
+            <TextareaAutosize minRows={4} style={{width:"35vw", borderRadius:'5px'}} onChange={(e) => createMessageHandler(e)}/>
+          </div>
         }  
       </div>
+      {Object.keys(profileSelected).length > 0 &&
       <div className="selected-profile-col">
-        Selected Profile Column
+        <img src={profileSelected.profile_url} style={{height:'100px', width:'100px', borderRadius:'100px'}}/>
+        <h3>{profileSelected.first_name + " " + profileSelected.last_name}</h3>
       </div>
+      }
     </div>
   )
 }

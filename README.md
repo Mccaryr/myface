@@ -6,10 +6,8 @@ This project was designed with React(Typescript), Node, GraphQL, MongoDB, AWS RD
 
 In the project directory, you can run:
 
-### `npm start`
-cd into client folder
+### `npm start`(cd into client folder first)
 This will start the client side code and opens localhost:3000 in the browser
 
-### `npm run server`
-cd into server folder
+### `npm run server`(cd into server folder first)
 This will start the node server that uses GraphQL to distribute data.

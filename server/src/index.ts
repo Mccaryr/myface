@@ -5,7 +5,7 @@ import mongoose from 'mongoose'
 import { Posts } from "./Entities/Post"
 import dotenv from 'dotenv'
 import { User } from "./Entities/User"
-import {generateUploadURL} from './S3/s3'
+import {deleteS3Object, generateUploadURL} from './S3/s3'
 import { ApolloServer } from "apollo-server"
 import { typeDefs } from "./Schema/typeDefs"
 import { resolvers } from "./Schema/resolvers"
@@ -51,6 +51,12 @@ const main = async () => {
     app.get("/s3_upload", async (req,res) => {
         const url = await generateUploadURL()
         res.send({url})
+    })
+
+    app.post("/s3_delete", async (req,res) => {
+        console.log(req.params)
+        await deleteS3Object(req.params)
+        res.send({"success": "success"})
     })
 
 

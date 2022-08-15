@@ -9,7 +9,7 @@ const MessageSchema = new mongoose.Schema({
     profile_url: {type: String, required: true},
     first_name: {type: String, required: true},
     last_name: {type: String, required: true},
-    date_string: {type: String},
+    createdAtString: {type: String},
     createdAt: {type: Date, default: Date.now, required: true} 
 })
 

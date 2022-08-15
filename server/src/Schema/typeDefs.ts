@@ -37,7 +37,7 @@ type Message {
     first_name: String 
     last_name: String
     createdAt: String
-    date_string: String
+    createdAtString: String
 }
 
 type Query {

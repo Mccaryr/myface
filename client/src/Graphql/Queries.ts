@@ -82,7 +82,7 @@ export const GET_ALL_USER_CHATS = gql`
             first_name
             last_name
             createdAt
-            date_string
+            createdAtString
             conversation_id
         }
     }

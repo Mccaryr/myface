@@ -34,7 +34,7 @@ const Chats = (props: any) => {
               </div>
               <div>
                 <h5>{chat.first_name + " " + chat.last_name}</h5>
-                <p>{chat.date_string}</p>
+                <p>{chat.createdAtString}</p>
                 <p>{chat.content}</p>
               </div>
             </div> 

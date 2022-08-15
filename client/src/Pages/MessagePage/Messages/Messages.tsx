@@ -13,7 +13,7 @@ import { GET_ALL_USER_MESSAGES } from '../../../Graphql/Queries';
 //   content: String 
 //   conversation_id: String 
 //   createdAt: String 
-//   date_string: String 
+//   createdAtString: String 
 //   first_name: String 
 //   last_name: String 
 //   profile_url: String 

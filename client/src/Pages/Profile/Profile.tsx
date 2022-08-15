@@ -11,11 +11,13 @@ import { CREATE_POST } from '../../Graphql/Mutations';
 import { useMutation, useQuery } from '@apollo/client';
 import { Post as PostType } from '../../models/PostModel'
 import Post from '../../components/Post/Post';
+import axios from 'axios';
 
 
 
 const Profile = () => {
-    const [uploadedImage, setUploadedImage] = useState<string | undefined>()
+    const [uploadedImage, setUploadedImage] = useState<any | null>()
+    const [uploadedImageFile, setUploadedImageFile] = useState<any | null>()
     const uid = useAppSelector((state) => state.user.uid)
     const [user, setUser] = useState<User>()
     const [createPost, {error}] = useMutation(CREATE_POST);
@@ -61,14 +63,26 @@ const Profile = () => {
       
     }
 
-    
+    const saveImageToS3 = async () => {
+      const { url }  = await fetch("http://localhost:3001/s3_upload").then(res => res.json());
+      const imageUrl = url.split('?')[0]
+
+          await fetch(url, {
+              method: "PUT",
+              headers: {"Content-Type": "image/jpg"},
+              body: uploadedImageFile
+              })
+
+      sessionStorage.setItem('profile_url', imageUrl)
+
+    }
 
 
     useEffect(() => {
       setUser(JSON.parse(sessionStorage.getItem('userInfo')!))
     }, [])
     
-
+    
 
   return (
     <div className='profile-page'>
@@ -109,7 +123,6 @@ const Profile = () => {
                 <TextareaAutosize minRows={4} style={{width:"35vw", borderRadius:'20px', textAlign:'center', border:'none', paddingTop:'15px'}} placeholder="What's on your mind?" value={postInput} onChange={(e) => setPostInput(e.target.value)}/>
             </form>
           </div>
-       
           <div className="user-post-feed">
             {loading && <h1>Loading</h1>}
             {postData?.user_posts.filter((user_post: PostType) => user_post.parentId === 0).map((filteredUserPosts: PostType) => {

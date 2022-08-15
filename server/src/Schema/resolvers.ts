@@ -57,7 +57,7 @@ export const resolvers = {
               }
 
               recentUniqueConversations.forEach((convos: any) => {
-                convos.date_string = convos.createdAt.toLocaleString()
+                convos.createdAtString = convos.createdAt.toLocaleString()
               })
             return recentUniqueConversations;
         },

@@ -82,7 +82,11 @@ const Profile = () => {
       setUser(JSON.parse(sessionStorage.getItem('userInfo')!))
     }, [])
     
-    
+    const deletePic = async (e: React.ChangeEvent<HTMLInputElement>) => {
+      e.preventDefault()
+      //Need to add key to every image made with S3 for future deletion and creation
+      await axios.post("http://localhost:3001/s3_delete", {Bucket: "myfacephotos", Key: "59dfdad2e7dcf95429746ec1c026a98b"})
+    }
 
   return (
     <div className='profile-page'>
@@ -114,6 +118,7 @@ const Profile = () => {
             <p>Studied at {user?.education}</p>
             <p>Lives at {user?.location}</p>
           </div>
+          <input type="file" onChange={(e) => deletePic(e)} />
           <button className='edit-details-btn'>Edit details</button>
         </div>
         <div className="posts-col">

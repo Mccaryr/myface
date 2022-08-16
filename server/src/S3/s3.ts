@@ -33,19 +33,11 @@ export async function generateUploadURL() {
 
 export async function deleteS3Object(params: any) {
     console.log("Inside deleteS3Obejct: ", params)
-    let paramss = {Bucket: 'myfacephotos', Key: params.objectKey, Body: params.Body}
-    s3.putObject(paramss, function(err, data) {
-        if(err) {
+    s3.deleteObject(params, function(err, data) {
+        if(err){
             console.log(err)
         } else {
-            console.log("updated: ", params)
+            console.log("deleted: ", params)
         }
     })
-    // s3.deleteObject(params, function(err, data) {
-    //     if(err){
-    //         console.log(err)
-    //     } else {
-    //         console.log("deleted: ", params)
-    //     }
-    // })
 }

@@ -9,6 +9,9 @@ import {deleteS3Object, generateUploadURL} from './S3/s3'
 import { ApolloServer } from "apollo-server"
 import { typeDefs } from "./Schema/typeDefs"
 import { resolvers } from "./Schema/resolvers"
+import bodyParser from "body-parser"
+import multer from 'multer'
+
 
 const main = async () => {
     
@@ -39,10 +42,24 @@ const main = async () => {
     });
 
     
+    const storage = multer.diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, 'Images')
+        },
+        filename: (req, file, cb) => {
+            cb(null, Date.now().toString())
+        }
+    })
 
+    const upload = multer({storage: storage})
     
 
     const app = express();
+    // parse application/x-www-form-urlencoded
+    app.use(bodyParser.urlencoded({ extended: true }))
+
+    // parse application/json
+    app.use(bodyParser.json())
     app.use(cors());
     // app.use(express.json())
 
@@ -53,10 +70,10 @@ const main = async () => {
         res.send({url})
     })
 
-    app.post("/s3_delete", async (req,res) => {
-        console.log(req.params)
-        await deleteS3Object(req.params)
-        res.send({"success": "success"})
+    app.use("/s3_delete", async (req,res) => {
+        await deleteS3Object(req.body)
+        // res.send({"success": req.body})
+        res.send({"success": "Great success!"})
     })
 
 
